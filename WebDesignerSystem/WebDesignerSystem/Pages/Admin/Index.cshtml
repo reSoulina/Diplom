@@ -1,0 +1,10 @@
+﻿@page
+@attribute [Authorize(Roles = "Designer")]
+@using Microsoft.AspNetCore.Authorization
+@{
+    ViewData["Title"] = "Панель администратора";
+}
+
+<h1>Панель администратора</h1>
+<p>Добро пожаловать, дизайнер!</p>
+<a asp-page="/Account/Logout" class="btn btn-danger">Выйти</a>

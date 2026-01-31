@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WebDesignerSystem.Models.Entities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Manage/Index" title="Manage">
+            @{
+                var user = await UserManager.GetUserAsync(User);
+                var displayName = user?.FullName ?? User.Identity?.Name;
+            }
+            Привет, @displayName!
+        </a>
+    </li>
+    
+    @if (User.IsInRole("Designer"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-page="/Admin/Index">Панель администратора</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-page="/Client/Index">Мой кабинет</a>
+        </li>
+    }
+    
+    <li class="nav-item">
+        <form class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+            <button type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-page="/Account/Register">Регистрация</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-page="/Account/Login">Вход</a>
+    </li>
+}
+</ul>

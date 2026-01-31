@@ -1,0 +1,48 @@
+﻿@page
+@attribute [Authorize(Roles = "Client")]
+@using Microsoft.AspNetCore.Authorization
+@{
+    ViewData["Title"] = "Кабинет клиента";
+}
+
+<div class="container">
+    <h1>Кабинет клиента</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Каталог</h5>
+                </div>
+                <div class="card-body">
+                    <p>Просмотр товаров и услуг</p>
+                    <a href="#" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Мои заказы</h5>
+                </div>
+                <div class="card-body">
+                    <p>История и текущие заказы</p>
+                    <a href="#" class="btn btn-primary">Посмотреть</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Запись на услуги</h5>
+                </div>
+                <div class="card-body">
+                    <p>Записаться на консультацию</p>
+                    <a href="#" class="btn btn-primary">Записаться</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
