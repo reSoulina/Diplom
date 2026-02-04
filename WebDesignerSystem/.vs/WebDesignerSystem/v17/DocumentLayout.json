@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\client\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\client\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,14 +27,46 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Client\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Client\\Index.cshtml",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Client\\Index.cshtml",
+              "RelativeToolTip": "WebDesignerSystem\\Pages\\Client\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-04T15:25:37.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Program.cs",
               "RelativeDocumentMoniker": "WebDesignerSystem\\Program.cs",
               "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Program.cs",
               "RelativeToolTip": "WebDesignerSystem\\Program.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGkAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-29T15:49:36.114Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Admin\\Index.cshtml",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Admin\\Index.cshtml",
+              "RelativeToolTip": "WebDesignerSystem\\Pages\\Admin\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-04T15:26:46.224Z",
               "EditorCaption": ""
             }
           ]

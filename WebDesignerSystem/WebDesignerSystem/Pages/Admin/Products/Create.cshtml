@@ -1,0 +1,110 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Designer")]
+@model WebDesignerSystem.Pages.Admin.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Добавить товар/услугу";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>@ViewData["Title"]</h2>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Название *</label>
+                    <input asp-for="Product.Name" class="form-control" />
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Цена *</label>
+                    <input asp-for="Product.Price" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Тип *</label>
+                    <select asp-for="Product.ProductType" class="form-control">
+                        <option value="product">Товар</option>
+                        <option value="service">Услуга</option>
+                    </select>
+                    <span asp-validation-for="Product.ProductType" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Категория</label>
+                    <select asp-for="Product.CategoryId" class="form-control">
+                        <option value="">Без категории</option>
+                        @if (Model.Product?.Categories != null)
+                        {
+                            foreach (var cat in Model.Product.Categories)
+                            {
+                                <option value="@cat.Value">@cat.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Описание</label>
+                    <textarea asp-for="Product.Description" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Изображение (опционально)</label>
+                    <input asp-for="Product.ImageFile" class="form-control" type="file" accept="image/*" id="imageFileInput" />
+                    <small class="text-muted">Можно добавить позже при редактировании</small>
+                    
+                    <div id="imagePreview" class="mt-2" style="display: none;">
+                        <p class="text-muted">Предпросмотр:</p>
+                        <img id="previewImage" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+                    </div>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input asp-for="Product.IsActive" class="form-check-input" checked />
+                    <label class="form-check-label">Активно (отображается в каталоге)</label>
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        document.getElementById('imageFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('previewImage');
+                    preview.src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('imagePreview').style.display = 'none';
+            }
+        });
+    </script>
+}

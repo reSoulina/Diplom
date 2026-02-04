@@ -5,6 +5,85 @@
     ViewData["Title"] = "Панель администратора";
 }
 
-<h1>Панель администратора</h1>
-<p>Добро пожаловать, дизайнер!</p>
-<a asp-page="/Account/Logout" class="btn btn-danger">Выйти</a>
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    
+    <div class="row mt-4">
+        <!-- Управление каталогом -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-box-seam" style="font-size: 3rem; color: #0d6efd;"></i>
+                    <h4 class="card-title mt-3">Каталог товаров</h4>
+                    <p class="card-text">Управление товарами и услугами</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Admin/Products/Index" class="btn btn-primary">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Управление категориями -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-tags" style="font-size: 3rem; color: #fd7e14;"></i>
+                    <h4 class="card-title mt-3">Категории</h4>
+                    <p class="card-text">Управление категориями товаров</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Admin/Categories/Index" class="btn btn-warning">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       @*  <!-- Управление заказами -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-cart" style="font-size: 3rem; color: #198754;"></i>
+                    <h4 class="card-title mt-3">Заказы</h4>
+                    <p class="card-text">Просмотр и управление заказами</p>
+                    <div class="d-grid gap-2">
+                        <a href="#" class="btn btn-success">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Календарь -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-calendar" style="font-size: 3rem; color: #6f42c1;"></i>
+                    <h4 class="card-title mt-3">Календарь</h4>
+                    <p class="card-text">Управление записями на услуги</p>
+                    <div class="d-grid gap-2">
+                        <a href="#" class="btn btn-purple">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+<style>
+    .btn-purple {
+        background-color: #6f42c1;
+        color: white;
+        border-color: #6f42c1;
+    }
+    .btn-purple:hover {
+        background-color: #5a32a3;
+        border-color: #5a32a3;
+    }
+    .btn-warning {
+        background-color: #fd7e14;
+        color: white;
+        border-color: #fd7e14;
+    }
+    .btn-warning:hover {
+        background-color: #e66a00;
+        border-color: #e66a00;
+    }
+</style>

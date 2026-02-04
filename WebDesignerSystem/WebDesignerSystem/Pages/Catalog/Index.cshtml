@@ -1,0 +1,143 @@
+﻿@page
+@model WebDesignerSystem.Pages.Catalog.IndexModel
+@{
+    ViewData["Title"] = "Каталог товаров и услуг";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Каталог товаров и услуг</h1>
+            <p class="lead">Выберите товары или запишитесь на консультацию</p>
+        </div>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="category" class="form-label">Категория</label>
+                            <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select">
+                                <option value="">Все категории</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="type" class="form-label">Тип</label>
+                            <select asp-for="ProductType" class="form-select">
+                                <option value="">Все типы</option>
+                                <option value="product">Товары</option>
+                                <option value="service">Услуги</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">Фильтровать</button>
+                            <a asp-page="./Index" class="btn btn-outline-secondary ms-2">Сбросить</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Список товаров/услуг -->
+    <div class="row">
+        @if (Model.Products.Any())
+        {
+            @foreach (var product in Model.Products)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <span class="badge @(product.IsService ? "bg-info" : "bg-success")">
+                                @(product.IsService ? "Услуга" : "Товар")
+                            </span>
+                            @if (product.Category != null)
+                            {
+                                <span class="badge bg-secondary float-end">@product.Category.Name</span>
+                            }
+                        </div>
+                        
+                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" 
+                                 style="height: 200px; object-fit: cover;"
+                                 onerror="this.src='/images/no-image.png'">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">@product.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="text-primary">@product.Price.ToString("C")</h4>
+                                
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @if (product.IsService)
+                                    {
+                                        <a href="/Client/Services/Book?serviceId=@product.Id" class="btn btn-primary">
+                                            <i class="bi bi-calendar-plus"></i> Записаться
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" asp-page-handler="AddToCart" asp-route-id="@product.Id">
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="bi bi-cart-plus"></i> В корзину
+                                            </button>
+                                        </form>
+                                    }
+                                }
+                                else
+                                {
+                                    <button class="btn btn-outline-primary" disabled title="Для добавления в корзину необходимо войти">
+                                        <i class="bi bi-cart-plus"></i> В корзину
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <h4>Товары не найдены</h4>
+                    <p>Попробуйте изменить параметры фильтрации</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Статистика -->
+   @*  <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Статистика каталога</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <h3>@Model.Products.Count()</h3>
+                            <p class="text-muted">Всего позиций</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>@Model.Products.Count(p => !p.IsService)</h3>
+                            <p class="text-muted">Товаров</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>@Model.Products.Count(p => p.IsService)</h3>
+                            <p class="text-muted">Услуг</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>@Model.Categories.Count()</h3>
+                            <p class="text-muted">Категорий</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@

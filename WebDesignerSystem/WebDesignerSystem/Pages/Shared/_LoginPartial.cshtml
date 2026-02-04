@@ -4,45 +4,46 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
+@* <ul class="navbar-nav">
+    <!-- Главное меню -->
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Manage/Index" title="Manage">
-            @{
-                var user = await UserManager.GetUserAsync(User);
-                var displayName = user?.FullName ?? User.Identity?.Name;
-            }
-            Привет, @displayName!
-        </a>
+        <a class="nav-link text-dark" asp-page="/Index">Главная</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-page="/Catalog/Index">Каталог</a>
     </li>
     
-    @if (User.IsInRole("Designer"))
-    {
+    @if (SignInManager.IsSignedIn(User))
+    {        
+        <!-- Меню по ролям -->
+        @if (User.IsInRole("Designer"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-page="/Admin/Index">Панель администратора</a>
+            </li>
+        }
+        else if (User.IsInRole("Client"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-page="/Client/Index">Мой кабинет</a>
+            </li>
+        }
+        
+        <!-- Выход -->
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-page="/Admin/Index">Панель администратора</a>
+            <form class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
+            </form>
         </li>
     }
     else
     {
+        <!-- Регистрация и вход -->
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-page="/Client/Index">Мой кабинет</a>
+            <a class="nav-link text-dark" asp-page="/Account/Register">Регистрация</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-page="/Account/Login">Вход</a>
         </li>
     }
-    
-    <li class="nav-item">
-        <form class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-            <button type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-page="/Account/Register">Регистрация</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-page="/Account/Login">Вход</a>
-    </li>
-}
-</ul>
+</ul> *@

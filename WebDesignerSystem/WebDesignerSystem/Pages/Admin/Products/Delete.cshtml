@@ -1,0 +1,86 @@
+﻿@page "{id:int}"
+@attribute [Authorize(Roles = "Designer")]
+@using Microsoft.AspNetCore.Authorization
+@model WebDesignerSystem.Pages.Admin.Products.DeleteModel
+
+@{
+    ViewData["Title"] = "Удалить товар/услугу";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5><i class="bi bi-exclamation-triangle"></i> Внимание!</h5>
+                        <p>Вы собираетесь удалить этот товар/услугу. Это действие нельзя отменить.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Информация о товаре:</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>Название:</strong> @Model.Product.Name
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Тип:</strong> 
+                                <span class="badge @(Model.Product.IsService ? "bg-info" : "bg-success")">
+                                    @(Model.Product.IsService ? "Услуга" : "Товар")
+                                </span>
+                            </li>
+                            @if (Model.Product.Category != null)
+                            {
+                                <li class="list-group-item">
+                                    <strong>Категория:</strong> @Model.Product.Category.Name
+                                </li>
+                            }
+                            <li class="list-group-item">
+                                <strong>Цена:</strong> @Model.Product.Price.ToString("C")
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Статус:</strong> 
+                                @if (Model.Product.IsActive)
+                                {
+                                    <span class="badge bg-success">Активно</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Неактивно</span>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Product.ImageUrl))
+                    {
+                        <div class="mb-4">
+                            <strong>Изображение:</strong>
+                            <div class="mt-2">
+                                <img src="@Model.Product.ImageUrl" 
+                                     alt="@Model.Product.Name" 
+                                     class="img-thumbnail"
+                                     style="max-width: 200px; max-height: 200px;"
+                                     onerror="this.src='/images/no-image.png'" />
+                            </div>
+                        </div>
+                    }
+
+                    <form method="post">
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Отмена
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Удалить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebDesignerSystem.Models.ViewModels
@@ -28,23 +27,19 @@ namespace WebDesignerSystem.Models.ViewModels
 
         [Required]
         [Display(Name = "Тип")]
-        public string ProductType { get; set; } // "product" или "service"
+        public string ProductType { get; set; } = "product";
 
         [Display(Name = "Активно")]
         public bool IsActive { get; set; } = true;
 
         [Display(Name = "Изображение")]
         [DataType(DataType.Upload)]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; } // Добавлен знак ?
 
-        public string ExistingImageUrl { get; set; }
+        public string? ExistingImageUrl { get; set; } // Добавлен знак ?
 
-        // Для выпадающего списка категорий
-        public List<SelectListItem> Categories { get; set; }
+        public List<SelectListItem> Categories { get; set; } = new();
 
-        public ProductViewModel()
-        {
-            Categories = new List<SelectListItem>();
-        }
+        public bool IsService => ProductType == "service";
     }
 }

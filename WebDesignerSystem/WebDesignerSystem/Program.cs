@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebDesignerSystem.Data;
 using WebDesignerSystem.Models.Entities;
+using WebDesignerSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +22,20 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<IFileService, FileService>();
+
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+// Создаем папку для загрузок если ее нет
+var uploadsPath = Path.Combine(app.Environment.WebRootPath, "uploads", "products");
+if (!Directory.Exists(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+    Console.WriteLine($"Создана папка для загрузок: {uploadsPath}");
+}
 
 // Путь к БД для отладки
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -180,19 +191,25 @@ using (var scope = app.Services.CreateScope())
                 {
                     Id = 1,
                     Name = "Шаблоны сайтов",
-                    Description = "Готовые шаблоны для сайтов" // Добавлено
+                    Description = "Готовые шаблоны для различных типов сайтов"
                 },
                 new Category
                 {
                     Id = 2,
-                    Name = "Логотипы",
-                    Description = "Дизайн логотипов" // Добавлено
+                    Name = "Дизайн логотипов",
+                    Description = "Разработка уникальных логотипов"
                 },
                 new Category
                 {
                     Id = 3,
                     Name = "Консультации",
-                    Description = "Профессиональные консультации" // Добавлено
+                    Description = "Профессиональные консультации по веб-дизайну"
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Разработка под ключ",
+                    Description = "Полный цикл разработки сайтов"
                 }
             );
             await context.SaveChangesAsync();
@@ -206,34 +223,72 @@ using (var scope = app.Services.CreateScope())
                 new Product
                 {
                     Name = "Шаблон интернет-магазина",
-                    Description = "Готовый шаблон",
+                    Description = "Готовый адаптивный шаблон для интернет-магазина с корзиной и фильтрами",
                     Price = 5000,
                     CategoryId = 1,
+                    IsService = false,
                     IsActive = true,
+                    ImageUrl = "https://via.placeholder.com/400x300/007bff/ffffff?text=Магазин",
                     CreatedAt = DateTime.UtcNow
                 },
                 new Product
                 {
                     Name = "Логотип для кафе",
-                    Description = "Уникальный дизайн",
+                    Description = "Уникальный дизайн логотипа для кофейни или ресторана",
                     Price = 3000,
                     CategoryId = 2,
+                    IsService = false,
                     IsActive = true,
+                    ImageUrl = "https://via.placeholder.com/400x300/28a745/ffffff?text=Логотип",
                     CreatedAt = DateTime.UtcNow
                 },
                 new Product
                 {
                     Name = "Консультация по веб-дизайну",
-                    Description = "1 час консультации",
+                    Description = "Индивидуальная консультация 1 час по вопросам веб-дизайна",
                     Price = 1500,
                     CategoryId = 3,
                     IsService = true,
                     IsActive = true,
+                    ImageUrl = "https://via.placeholder.com/400x300/17a2b8/ffffff?text=Консультация",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Product
+                {
+                    Name = "Корпоративный сайт",
+                    Description = "Разработка корпоративного сайта под ключ",
+                    Price = 25000,
+                    CategoryId = 1,
+                    IsService = true,
+                    IsActive = true,
+                    ImageUrl = "https://via.placeholder.com/400x300/6f42c1/ffffff?text=Корпоративный",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Product
+                {
+                    Name = "Фирменный бланк",
+                    Description = "Дизайн фирменного бланка для документов",
+                    Price = 2000,
+                    CategoryId = 2,
+                    IsService = false,
+                    IsActive = true,
+                    ImageUrl = "https://via.placeholder.com/400x300/fd7e14/ffffff?text=Бланк",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Product
+                {
+                    Name = "Лендинг страница",
+                    Description = "Создание одностраничного сайта для продвижения услуги",
+                    Price = 15000,
+                    CategoryId = 1,
+                    IsService = true,
+                    IsActive = true,
+                    ImageUrl = "https://via.placeholder.com/400x300/dc3545/ffffff?text=Лендинг",
                     CreatedAt = DateTime.UtcNow
                 }
             );
             await context.SaveChangesAsync();
-            Console.WriteLine("Created products");
+            Console.WriteLine("Created products with images");
         }
 
         Console.WriteLine("✅ База данных успешно инициализирована!");
@@ -255,6 +310,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();

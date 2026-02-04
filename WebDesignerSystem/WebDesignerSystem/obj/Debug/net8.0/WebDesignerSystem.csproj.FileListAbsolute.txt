@@ -2,6 +2,7 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\appsettings
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\appsettings.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.staticwebassets.runtime.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.staticwebassets.endpoints.json
+D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.exe
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.deps.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.runtimeconfig.json
@@ -113,6 +114,7 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesigner
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.MvcApplicationPartsAssemblyInfo.cache
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.RazorAssemblyInfo.cache
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.RazorAssemblyInfo.cs
+D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.sourcelink.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\rjimswa.dswa.cache.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -130,6 +132,5 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\refint\WebD
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.pdb
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.genruntimeconfig.cache
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\ref\WebDesignerSystem.dll
-D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db
-D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-wal
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-shm
+D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-wal

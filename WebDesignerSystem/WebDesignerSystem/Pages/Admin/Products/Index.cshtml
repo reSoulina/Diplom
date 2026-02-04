@@ -1,0 +1,151 @@
+﻿@page
+@attribute [Authorize(Roles = "Designer")]
+@using Microsoft.AspNetCore.Authorization
+@model WebDesignerSystem.Pages.Admin.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Управление каталогом";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@ViewData["Title"]</h1>
+        <a asp-page="Create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Добавить товар/услугу
+        </a>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Категория</label>
+                    <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select">
+                        <option value="">Все категории</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Тип</label>
+                    <select asp-for="ProductType" class="form-select">
+                        <option value="">Все</option>
+                        <option value="product">Товары</option>
+                        <option value="service">Услуги</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Применить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Таблица товаров -->
+    @if (Model.Products.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Изображение</th>
+                        <th>Название</th>
+                        <th>Категория</th>
+                        <th>Тип</th>
+                        <th>Цена</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@product.ImageUrl" alt="@product.Name" 
+                                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
+                                     onerror="this.src='/images/no-image.png'">
+                            </td>
+                            <td>@product.Name</td>
+                            <td>
+                                @if (product.Category != null)
+                                {
+                                    <span class="badge bg-secondary">@product.Category.Name</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge @(product.IsService ? "bg-info" : "bg-success")">
+                                    @(product.IsService ? "Услуга" : "Товар")
+                                </span>
+                            </td>
+                            <td>@product.Price.ToString("C")</td>
+                            <td>
+                                @if (product.IsActive)
+                                {
+                                    <span class="badge bg-success">Активно</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Неактивно</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-page="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-page="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Статистика -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>@Model.Products.Count()</h3>
+                        <p class="text-muted">Всего</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>@Model.Products.Count(p => !p.IsService)</h3>
+                        <p class="text-muted">Товаров</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>@Model.Products.Count(p => p.IsService)</h3>
+                        <p class="text-muted">Услуг</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>@Model.Products.Count(p => p.IsActive)</h3>
+                        <p class="text-muted">Активных</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <h4>Товары не найдены</h4>
+            <p>Добавьте первый товар или измените параметры фильтрации</p>
+            <a asp-page="Create" class="btn btn-primary">Добавить товар</a>
+        </div>
+    }
+</div>

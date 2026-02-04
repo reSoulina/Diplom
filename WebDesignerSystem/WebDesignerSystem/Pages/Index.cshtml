@@ -1,110 +1,155 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Главная";
+    ViewData["Title"] = "Информационная система веб-дизайнера";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Информационная система веб-дизайнера</h1>
-    
-    <div class="row mt-5">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Добро пожаловать!</h4>
-                </div>
+<div class="container">
+    <!-- Герой секция -->
+    <div class="hero-section text-center py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
+
+        <a asp-page="/Catalog/Index" class="btn btn-light btn-lg me-2">Смотреть каталог</a>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a asp-page="/Account/Login" class="btn btn-outline-light btn-lg">Войти в систему</a>
+        }
+    </div>
+
+    <!-- Преимущества -->
+    @* <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
                 <div class="card-body">
-                    @if (!User.Identity.IsAuthenticated)
+                    <i class="bi bi-laptop" style="font-size: 3rem; color: #667eea;"></i>
+                    <h4 class="card-title mt-3">Готовые шаблоны</h4>
+                    <p class="card-text">Большая коллекция адаптивных шаблонов для различных типов сайтов</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-brush" style="font-size: 3rem; color: #764ba2;"></i>
+                    <h4 class="card-title mt-3">Уникальный дизайн</h4>
+                    <p class="card-text">Создаем индивидуальный дизайн логотипов и фирменного стиля</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-chat-dots" style="font-size: 3rem; color: #f093fb;"></i>
+                    <h4 class="card-title mt-3">Консультации</h4>
+                    <p class="card-text">Профессиональные консультации по веб-дизайну и разработке</p>
+                </div>
+            </div>
+        </div>
+    </div> *@
+
+    <!-- Популярные товары -->
+   @*  <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="mb-4">Популярные товары и услуги</h2>
+            <div class="row">
+                @{
+                    // Получаем несколько популярных товаров
+                    var popularProducts = new List<dynamic>
                     {
-                        <p class="lead">Для начала работы необходимо войти или зарегистрироваться</p>
-                        <div class="d-grid gap-2 d-md-block">
-                            <a asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">Войти</a>
-                            <a asp-page="/Account/Register" class="btn btn-outline-primary btn-lg">Регистрироваться как клиент</a>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <h5>Тестовые аккаунты:</h5>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h6>Дизайнер</h6>
-                                            <p><strong>Email:</strong> designer@example.com</p>
-                                            <p><strong>Пароль:</strong> Designer123!</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h6>Клиент</h6>
-                                            <p><strong>Email:</strong> client@example.com</p>
-                                            <p><strong>Пароль:</strong> Client123!</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        new { Name = "Шаблон интернет-магазина", Price = 5000, Type = "Товар", Category = "Шаблоны" },
+                        new { Name = "Логотип для кафе", Price = 3000, Type = "Товар", Category = "Логотипы" },
+                        new { Name = "Консультация 1 час", Price = 1500, Type = "Услуга", Category = "Консультации" },
+                        new { Name = "Корпоративный сайт", Price = 25000, Type = "Услуга", Category = "Разработка" }
+                    };
+                }
+                
+                @foreach (var product in popularProducts)
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="badge @(product.Type == "Услуга" ? "bg-info" : "bg-success") mb-2">
+                                    @product.Type
+                                </span>
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="text-muted">@product.Category</p>
+                                <h4 class="text-primary">@product.Price.ToString("C")</h4>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-page="/Catalog/Index" class="btn btn-outline-primary w-100">Подробнее</a>
                             </div>
                         </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div> *@
+
+    <!-- Информация о дизайнере -->
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>О дизайнере</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/300x300" class="img-fluid rounded-circle" alt="Дизайнер">
+                        </div>
+                        <div class="col-md-8">
+                            <h4>Иван Дизайнеров</h4>
+                            <p class="text-muted">Веб-дизайнер с 5-летним опытом</p>
+                            <p>Специализируюсь на создании современных и функциональных веб-сайтов. Работал с более чем 50 клиентами из различных сфер бизнеса.</p>
+                            <ul>
+                                <li>Разработка UI/UX дизайна</li>
+                                <li>Создание логотипов и фирменного стиля</li>
+                                <li>Адаптивная верстка</li>
+                                <li>Консультации по веб-разработке</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Контакты</h3>
+                </div>
+                <div class="card-body">
+                    <p><i class="bi bi-envelope"></i> designer@example.com</p>
+                    <p><i class="bi bi-telephone"></i> +7 (999) 123-45-67</p>
+                    <p><i class="bi bi-clock"></i> Пн-Пт: 9:00 - 18:00</p>
+                    <hr>
+                    <h5>Быстрый старт</h5>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-page="/Catalog/Index" class="btn btn-primary w-100 mb-2">Смотреть каталог</a>
+                        @if (User.IsInRole("Client"))
+                        {
+                            <a asp-page="/Client/Services" class="btn btn-outline-primary w-100">Запись на консультацию</a>
+                        }
                     }
                     else
                     {
-                        <p class="lead">Добро пожаловать, @User.Identity.Name!</p>
-                        
-                        @if (User.IsInRole("Designer"))
-                        {
-                            <p>Вы вошли как <span class="badge bg-primary">Дизайнер</span></p>
-                            <a asp-page="/Admin/Index" class="btn btn-primary">Перейти в панель администратора</a>
-                        }
-                        else if (User.IsInRole("Client"))
-                        {
-                            <p>Вы вошли как <span class="badge bg-success">Клиент</span></p>
-                            <div class="d-grid gap-2 d-md-block">
-                                <a asp-page="/Client/Index" class="btn btn-primary me-2">Каталог товаров</a>
-                                <a asp-page="/Client/MyOrders" class="btn btn-outline-primary">Мои заказы</a>
-                                <a asp-page="/Client/Services" class="btn btn-outline-primary">Запись на услуги</a>
-                            </div>
-                        }
+                        <a asp-page="/Account/Register" class="btn btn-primary w-100 mb-2">Зарегистрироваться</a>
+                        <a asp-page="/Account/Login" class="btn btn-outline-primary w-100">Войти в систему</a>
                     }
                 </div>
             </div>
-            
-            @if (!User.Identity.IsAuthenticated)
-            {
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Для клиентов</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul>
-                                    <li>Просмотр товаров и услуг</li>
-                                    <li>Добавление в корзину</li>
-                                    <li>Оформление заказов</li>
-                                    <li>Запись на консультации</li>
-                                    <li>Отслеживание заказов</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Для дизайнеров</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul>
-                                    <li>Управление товарами</li>
-                                    <li>Просмотр заказов</li>
-                                    <li>Управление статусами</li>
-                                    <li>Календарь записей</li>
-                                    <li>Статистика</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
         </div>
     </div>
 </div>
+
+<style>
+    .hero-section {
+        padding: 80px 20px;
+    }
+    .card {
+        transition: transform 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+</style>
