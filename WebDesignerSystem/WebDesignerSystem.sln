@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36616.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDesignerSystem", "WebDesignerSystem\WebDesignerSystem.csproj", "{A6C427FE-EFFA-4330-893F-9B043CF95830}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDesignerSystem.Tests", "WebDesignerSystem.Tests\WebDesignerSystem.Tests.csproj", "{F3343768-6A37-4E4C-BB60-4DD25EFCC882}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A6C427FE-EFFA-4330-893F-9B043CF95830}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6C427FE-EFFA-4330-893F-9B043CF95830}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6C427FE-EFFA-4330-893F-9B043CF95830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3343768-6A37-4E4C-BB60-4DD25EFCC882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3343768-6A37-4E4C-BB60-4DD25EFCC882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3343768-6A37-4E4C-BB60-4DD25EFCC882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3343768-6A37-4E4C-BB60-4DD25EFCC882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

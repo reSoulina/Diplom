@@ -4,140 +4,185 @@
     ViewData["Title"] = "Каталог товаров и услуг";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Каталог товаров и услуг</h1>
-            <p class="lead">Выберите товары или запишитесь на консультацию</p>
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="mb-2">Каталог</h1>
+                <p class="text-muted mb-0">Товары и услуги для вашего проекта</p>
+            </div>
+            <div class="stat-card">
+                <h3>@Model.Products.Count()</h3>
+                <p class="text-muted mb-0">Доступно</p>
+            </div>
         </div>
-    </div>
-
-    <!-- Фильтры -->
-    <div class="row mb-4">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form method="get" class="row g-3">
-                        <div class="col-md-4">
-                            <label for="category" class="form-label">Категория</label>
-                            <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select">
-                                <option value="">Все категории</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="type" class="form-label">Тип</label>
-                            <select asp-for="ProductType" class="form-select">
-                                <option value="">Все типы</option>
-                                <option value="product">Товары</option>
-                                <option value="service">Услуги</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary w-100">Фильтровать</button>
-                            <a asp-page="./Index" class="btn btn-outline-secondary ms-2">Сбросить</a>
-                        </div>
-                    </form>
-                </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="get" class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Категория</label>
+                        <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select">
+                            <option value="">Все категории</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Тип</label>
+                        <select asp-for="ProductType" class="form-select">
+                            <option value="">Все типы</option>
+                            <option value="product">Товары</option>
+                            <option value="service">Услуги</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end gap-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
+                            <i class="bi bi-funnel me-2"></i>Фильтровать
+                        </button>
+                        <a asp-page="./Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle"></i>
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Список товаров/услуг -->
-    <div class="row">
-        @if (Model.Products.Any())
+@if (Model.Products.Any())
+{
+    <div class="row g-4">
+        @foreach (var product in Model.Products)
         {
-            @foreach (var product in Model.Products)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <span class="badge @(product.IsService ? "bg-info" : "bg-success")">
-                                @(product.IsService ? "Услуга" : "Товар")
-                            </span>
-                            @if (product.Category != null)
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center py-3">
+                        <span class="badge @(product.IsService ? "bg-info" : "bg-success")">
+                            @(product.IsService ? "Услуга" : "Товар")
+                        </span>
+                        @if (product.Category != null)
+                        {
+                            <small class="text-muted">@product.Category.Name</small>
+                        }
+                    </div>
+                    
+                    <div class="text-center">
+                        <!-- Увеличиваем фото -->
+                        <div class="product-image-container" style="height: 250px; overflow: hidden;">
+                            @if (!string.IsNullOrEmpty(product.ImageUrl))
                             {
-                                <span class="badge bg-secondary float-end">@product.Category.Name</span>
+                               <img src="@product.ImageUrl" 
+                                     class="img-fluid h-100 w-100 object-fit-cover"
+                                     alt="@product.Name"
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/400x250?text=No+Image'">
+                            }
+                            else
+                            {
+                                <div class="h-100 w-100 d-flex align-items-center justify-content-center bg-light">
+                                    <i class="bi @(product.IsService ? "bi-calendar-check" : "bi-box-seam") display-4 text-muted"></i>
+                                </div>
                             }
                         </div>
                         
-                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" 
-                                 style="height: 200px; object-fit: cover;"
-                                 onerror="this.src='/images/no-image.png'">
-                        
-                        <div class="card-body">
-                            <h5 class="card-title">@product.Name</h5>
-                            <p class="card-text">@product.Description</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h4 class="text-primary">@product.Price.ToString("C")</h4>
+                        <div class="p-4">
+                            <h5 class="card-title mb-2">@product.Name</h5>
+                            <p class="card-text text-muted mb-3" style="min-height: 60px;">@product.Description</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <h4 class="text-primary mb-0">@product.Price.ToString("C")</h4>
                                 
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     @if (product.IsService)
                                     {
-                                        <a href="/Client/Services/Book?serviceId=@product.Id" class="btn btn-primary">
-                                            <i class="bi bi-calendar-plus"></i> Записаться
+                                        <a href="/Client/Services/Book?serviceId=@product.Id" 
+                                           class="btn btn-primary btn-sm px-3">
+                                            <i class="bi bi-calendar-plus me-1"></i>Записаться
                                         </a>
                                     }
                                     else
                                     {
                                         <form method="post" asp-page-handler="AddToCart" asp-route-id="@product.Id">
-                                            <button type="submit" class="btn btn-success">
-                                                <i class="bi bi-cart-plus"></i> В корзину
+                                            <button type="submit" class="btn btn-success btn-sm px-3">
+                                                <i class="bi bi-cart-plus me-1"></i>В корзину
                                             </button>
                                         </form>
                                     }
                                 }
                                 else
                                 {
-                                    <button class="btn btn-outline-primary" disabled title="Для добавления в корзину необходимо войти">
-                                        <i class="bi bi-cart-plus"></i> В корзину
+                                    <button class="btn btn-outline-primary btn-sm px-3" 
+                                            data-bs-toggle="tooltip" 
+                                            title="Для добавления в корзину необходимо войти">
+                                        <i class="bi bi-cart-plus me-1"></i>В корзину
                                     </button>
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
-            }
-        }
-        else
-        {
-            <div class="col-md-12">
-                <div class="alert alert-info">
-                    <h4>Товары не найдены</h4>
-                    <p>Попробуйте изменить параметры фильтрации</p>
-                </div>
             </div>
         }
     </div>
-
-    <!-- Статистика -->
-   @*  <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Статистика каталога</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3 text-center">
-                            <h3>@Model.Products.Count()</h3>
-                            <p class="text-muted">Всего позиций</p>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <h3>@Model.Products.Count(p => !p.IsService)</h3>
-                            <p class="text-muted">Товаров</p>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <h3>@Model.Products.Count(p => p.IsService)</h3>
-                            <p class="text-muted">Услуг</p>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <h3>@Model.Categories.Count()</h3>
-                            <p class="text-muted">Категорий</p>
-                        </div>
-                    </div>
-                </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h3>@Model.Products.Count()</h3>
+                <p class="text-muted mb-0">Всего позиций</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h3>@Model.Products.Count(p => !p.IsService)</h3>
+                <p class="text-muted mb-0">Товаров</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h3>@Model.Products.Count(p => p.IsService)</h3>
+                <p class="text-muted mb-0">Услуг</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h3>@Model.Categories.Count()</h3>
+                <p class="text-muted mb-0">Категорий</p>
             </div>
         </div>
     </div>
-</div> *@
+}
+else
+{
+    <div class="text-center py-5">
+        <div class="mb-4">
+            <i class="bi bi-search display-1 text-muted"></i>
+        </div>
+        <h3 class="mb-3">Товары не найдены</h3>
+        <p class="text-muted mb-4">Попробуйте изменить параметры фильтрации</p>
+        <a asp-page="./Index" class="btn btn-primary">
+            <i class="bi bi-arrow-clockwise me-2"></i>Сбросить фильтры
+        </a>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            // Инициализация tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+            
+            // Плавное увеличение фото при наведении
+            $('.product-image-container img').hover(
+                function() {
+                    $(this).css('transform', 'scale(1.05)');
+                },
+                function() {
+                    $(this).css('transform', 'scale(1)');
+                }
+            );
+        });
+    </script>
+}

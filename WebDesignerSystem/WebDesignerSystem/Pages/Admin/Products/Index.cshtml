@@ -4,14 +4,17 @@
 @model WebDesignerSystem.Pages.Admin.Products.IndexModel
 
 @{
-    ViewData["Title"] = "Управление каталогом";
+    ViewData["Title"] = "Товары и услуги";
 }
 
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>@ViewData["Title"]</h1>
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="mb-2">Товары и услуги</h1>
+            <p class="text-muted mb-0">Управление каталогом</p>
+        </div>
         <a asp-page="Create" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Добавить товар/услугу
+            <i class="bi bi-plus-circle me-2"></i> Добавить
         </a>
     </div>
 
@@ -40,20 +43,19 @@
         </div>
     </div>
 
-    <!-- Таблица товаров -->
     @if (Model.Products.Any())
     {
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="table-light">
                     <tr>
-                        <th>Изображение</th>
+                        <th style="width: 70px;">Фото</th>
                         <th>Название</th>
                         <th>Категория</th>
                         <th>Тип</th>
                         <th>Цена</th>
                         <th>Статус</th>
-                        <th>Действия</th>
+                        <th style="width: 100px;">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,24 +63,47 @@
                     {
                         <tr>
                             <td>
-                                <img src="@product.ImageUrl" alt="@product.Name" 
-                                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
-                                     onerror="this.src='/images/no-image.png'">
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <img src="@product.ImageUrl" alt="@product.Name" 
+                                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjBGMkY0Ii8+CjxwYXRoIGQ9Ik0yMCAyNUMjMCAyMi4yMzg3IDIyLjIzODcgMjAgMjUgMjBDMjcuNzYxMyAyMCAzMCAyMi4yMzg3IDMwIDI1QzMwIDI3Ljc2MTMgMjcuNzYxMyAzMCAyNSAzMEMyMi4yMzg3IDMwIDIwIDI3Ljc2MTMgMjAgMjVaTTQwIDQwSDIwQzE4Ljg5NTQgNDAgMTggMzkuMTA0NiAxOCAzOFYzNC44MjZDMjEuOTI3NCAzMS41NDY3IDMzLjA3MjYgMzEuNTQ2NyAzNyAzNC44MjZWMzhDMzcgMzkuMTA0NiAzNi4xMDQ2IDQwIDM1IDQwWiIgZmlsbD0iI0NEQ1RDRSIvPgo8L3N2Zz4K'">
+                                }
+                                else
+                                {
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                                         style="width: 50px; height: 50px;">
+                                        <i class="bi @(product.IsService ? "bi-calendar-check" : "bi-box-seam") text-muted"></i>
+                                    </div>
+                                }
                             </td>
-                            <td>@product.Name</td>
-                            <td>
+                            <td class="align-middle">
+                                <strong>@product.Name</strong>
+                                @if (!string.IsNullOrEmpty(product.Description))
+                                {
+                                    <br>
+                                    <small class="text-muted">@(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)</small>
+                                }
+                            </td>
+                            <td class="align-middle">
                                 @if (product.Category != null)
                                 {
                                     <span class="badge bg-secondary">@product.Category.Name</span>
                                 }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <span class="badge @(product.IsService ? "bg-info" : "bg-success")">
                                     @(product.IsService ? "Услуга" : "Товар")
                                 </span>
                             </td>
-                            <td>@product.Price.ToString("C")</td>
-                            <td>
+                            <td class="align-middle">
+                                <strong>@product.Price.ToString("C")</strong>
+                            </td>
+                            <td class="align-middle">
                                 @if (product.IsActive)
                                 {
                                     <span class="badge bg-success">Активно</span>
@@ -88,12 +113,14 @@
                                     <span class="badge bg-danger">Неактивно</span>
                                 }
                             </td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a asp-page="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">
+                            <td class="align-middle">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-page="Edit" asp-route-id="@product.Id" class="btn btn-outline-primary" 
+                                       title="Редактировать">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a asp-page="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger">
+                                    <a asp-page="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger"
+                                       title="Удалить">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </div>
@@ -107,45 +134,42 @@
         <!-- Статистика -->
         <div class="row mt-4">
             <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>@Model.Products.Count()</h3>
-                        <p class="text-muted">Всего</p>
-                    </div>
+                <div class="stat-card">
+                    <h3>@Model.Products.Count()</h3>
+                    <p class="text-muted mb-0">Всего</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>@Model.Products.Count(p => !p.IsService)</h3>
-                        <p class="text-muted">Товаров</p>
-                    </div>
+                <div class="stat-card">
+                    <h3>@Model.Products.Count(p => !p.IsService)</h3>
+                    <p class="text-muted mb-0">Товаров</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>@Model.Products.Count(p => p.IsService)</h3>
-                        <p class="text-muted">Услуг</p>
-                    </div>
+                <div class="stat-card">
+                    <h3>@Model.Products.Count(p => p.IsService)</h3>
+                    <p class="text-muted mb-0">Услуг</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h3>@Model.Products.Count(p => p.IsActive)</h3>
-                        <p class="text-muted">Активных</p>
-                    </div>
+                <div class="stat-card">
+                    <h3>@Model.Products.Count(p => p.IsActive)</h3>
+                    <p class="text-muted mb-0">Активных</p>
                 </div>
             </div>
         </div>
     }
     else
     {
-        <div class="alert alert-info">
-            <h4>Товары не найдены</h4>
-            <p>Добавьте первый товар или измените параметры фильтрации</p>
-            <a asp-page="Create" class="btn btn-primary">Добавить товар</a>
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-box display-1 text-muted"></i>
+            </div>
+            <h3 class="mb-3">Товары не найдены</h3>
+            <p class="text-muted mb-4">Добавьте первый товар или измените параметры фильтрации</p>
+            <a asp-page="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Добавить товар
+            </a>
         </div>
     }
 </div>

@@ -4,152 +4,218 @@
     ViewData["Title"] = "Информационная система веб-дизайнера";
 }
 
-<div class="container">
-    <!-- Герой секция -->
-    <div class="hero-section text-center py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
-
-        <a asp-page="/Catalog/Index" class="btn btn-light btn-lg me-2">Смотреть каталог</a>
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <a asp-page="/Account/Login" class="btn btn-outline-light btn-lg">Войти в систему</a>
-        }
-    </div>
-
-    <!-- Преимущества -->
-    @* <div class="row mb-5">
-        <div class="col-md-4 mb-4">
-            <div class="card text-center h-100">
-                <div class="card-body">
-                    <i class="bi bi-laptop" style="font-size: 3rem; color: #667eea;"></i>
-                    <h4 class="card-title mt-3">Готовые шаблоны</h4>
-                    <p class="card-text">Большая коллекция адаптивных шаблонов для различных типов сайтов</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card text-center h-100">
-                <div class="card-body">
-                    <i class="bi bi-brush" style="font-size: 3rem; color: #764ba2;"></i>
-                    <h4 class="card-title mt-3">Уникальный дизайн</h4>
-                    <p class="card-text">Создаем индивидуальный дизайн логотипов и фирменного стиля</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card text-center h-100">
-                <div class="card-body">
-                    <i class="bi bi-chat-dots" style="font-size: 3rem; color: #f093fb;"></i>
-                    <h4 class="card-title mt-3">Консультации</h4>
-                    <p class="card-text">Профессиональные консультации по веб-дизайну и разработке</p>
-                </div>
-            </div>
-        </div>
-    </div> *@
-
-    <!-- Популярные товары -->
-   @*  <div class="row mb-5">
-        <div class="col-md-12">
-            <h2 class="mb-4">Популярные товары и услуги</h2>
-            <div class="row">
-                @{
-                    // Получаем несколько популярных товаров
-                    var popularProducts = new List<dynamic>
+<!-- Герой секция -->
+<section class="hero-section py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Создаём цифровые решения, которые работают</h1>
+                <p class="lead mb-4">Профессиональный веб-дизайн, разработка сайтов и консультации от опытного специалиста с 5-летним опытом.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a asp-page="/Catalog/Index" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-grid me-2"></i>Смотреть каталог
+                    </a>
+                    @if (!User.Identity.IsAuthenticated)
                     {
-                        new { Name = "Шаблон интернет-магазина", Price = 5000, Type = "Товар", Category = "Шаблоны" },
-                        new { Name = "Логотип для кафе", Price = 3000, Type = "Товар", Category = "Логотипы" },
-                        new { Name = "Консультация 1 час", Price = 1500, Type = "Услуга", Category = "Консультации" },
-                        new { Name = "Корпоративный сайт", Price = 25000, Type = "Услуга", Category = "Разработка" }
-                    };
-                }
-                
-                @foreach (var product in popularProducts)
-                {
-                    <div class="col-md-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <span class="badge @(product.Type == "Услуга" ? "bg-info" : "bg-success") mb-2">
-                                    @product.Type
-                                </span>
-                                <h5 class="card-title">@product.Name</h5>
-                                <p class="text-muted">@product.Category</p>
-                                <h4 class="text-primary">@product.Price.ToString("C")</h4>
+                        <a asp-page="/Account/Login" class="btn btn-outline-primary btn-lg px-4">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти в систему
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="bi bi-laptop text-primary fs-2"></i>
                             </div>
-                            <div class="card-footer">
-                                <a asp-page="/Catalog/Index" class="btn btn-outline-primary w-100">Подробнее</a>
+                            <div>
+                                <h5 class="mb-1">50+ проектов</h5>
+                                <p class="text-muted mb-0">Успешно реализовано</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="bi bi-star text-success fs-2"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">100% гарантия</h5>
+                                <p class="text-muted mb-0">Качества и сроков</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="bi bi-clock text-warning fs-2"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Поддержка 24/7</h5>
+                                <p class="text-muted mb-0">После сдачи проекта</p>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
-        </div>
-    </div> *@
-
-    <!-- Информация о дизайнере -->
-    <div class="row mb-5">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3>О дизайнере</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/300x300" class="img-fluid rounded-circle" alt="Дизайнер">
-                        </div>
-                        <div class="col-md-8">
-                            <h4>Иван Дизайнеров</h4>
-                            <p class="text-muted">Веб-дизайнер с 5-летним опытом</p>
-                            <p>Специализируюсь на создании современных и функциональных веб-сайтов. Работал с более чем 50 клиентами из различных сфер бизнеса.</p>
-                            <ul>
-                                <li>Разработка UI/UX дизайна</li>
-                                <li>Создание логотипов и фирменного стиля</li>
-                                <li>Адаптивная верстка</li>
-                                <li>Консультации по веб-разработке</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Контакты</h3>
-                </div>
-                <div class="card-body">
-                    <p><i class="bi bi-envelope"></i> designer@example.com</p>
-                    <p><i class="bi bi-telephone"></i> +7 (999) 123-45-67</p>
-                    <p><i class="bi bi-clock"></i> Пн-Пт: 9:00 - 18:00</p>
-                    <hr>
-                    <h5>Быстрый старт</h5>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a asp-page="/Catalog/Index" class="btn btn-primary w-100 mb-2">Смотреть каталог</a>
-                        @if (User.IsInRole("Client"))
-                        {
-                            <a asp-page="/Client/Services" class="btn btn-outline-primary w-100">Запись на консультацию</a>
-                        }
-                    }
-                    else
-                    {
-                        <a asp-page="/Account/Register" class="btn btn-primary w-100 mb-2">Зарегистрироваться</a>
-                        <a asp-page="/Account/Login" class="btn btn-outline-primary w-100">Войти в систему</a>
-                    }
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- О дизайнере -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3">О дизайнере</h2>
+                <p class="lead text-muted">Профессиональный подход к каждому проекту</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <div class="card-body p-4 d-flex flex-column justify-content-center">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 mb-4 mb-md-0 text-center">
+                                <!-- Простое фото без круга -->
+                                <div class="mb-3">
+                                    <img src="~/images/profile_photo.png" 
+                                         class="img-fluid rounded" 
+                                         alt="Иван Дизайнеров"
+                                         style="max-width: 200px;"
+                                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <!-- Имя перенесено сюда -->
+                                <h3 class="mb-2">Иван Дизайнеров</h3>
+                                <p class="text-muted mb-4">Веб-дизайнер с 5-летним опытом</p>
+                                
+                                <p class="mb-4">Специализируюсь на создании современных и функциональных веб-сайтов. Работал с более чем 50 клиентами из различных сфер бизнеса.</p>
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>UI/UX дизайн</li>
+                                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Логотипы</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Адаптивная верстка</li>
+                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Консультации</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body p-4 d-flex flex-column justify-content-center">
+                        <div>
+                            <h4 class="mb-4"><i class="bi bi-telephone me-2"></i>Контакты</h4>
+                            
+                            <div class="mb-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-3">
+                                        <i class="bi bi-envelope text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">Email</small>
+                                        <strong>designer@example.com</strong>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-success bg-opacity-10 p-2 rounded-circle me-3">
+                                        <i class="bi bi-phone text-success"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">Телефон</small>
+                                        <strong>+7 (999) 123-45-67</strong>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-warning bg-opacity-10 p-2 rounded-circle me-3">
+                                        <i class="bi bi-clock text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">Часы работы</small>
+                                        <strong>Пн-Пт: 9:00 - 18:00</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h5 class="mb-3">Быстрый старт</h5>
+                            <div class="d-grid gap-2">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-page="/Catalog/Index" class="btn btn-primary">
+                                        <i class="bi bi-grid me-2"></i>Смотреть каталог
+                                    </a>
+                                    @if (User.IsInRole("Client"))
+                                    {
+                                        <a asp-page="/Client/Services" class="btn btn-outline-primary">
+                                            <i class="bi bi-calendar-plus me-2"></i>Запись на консультацию
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a asp-page="/Account/Register" class="btn btn-primary">
+                                        <i class="bi bi-person-plus me-2"></i>Зарегистрироваться
+                                    </a>
+                                    <a asp-page="/Account/Login" class="btn btn-outline-primary">
+                                        <i class="bi bi-box-arrow-in-right me-2"></i>Войти в систему
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <style>
     .hero-section {
-        padding: 80px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: var(--radius);
+        margin-top: 1rem;
     }
-    .card {
-        transition: transform 0.3s;
+    
+    .hero-section h1, .hero-section p {
+        color: white;
     }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    
+    .hero-section .btn-primary {
+        background: white;
+        color: var(--primary);
+    }
+    
+    .hero-section .btn-outline-primary {
+        border-color: white;
+        color: white;
+    }
+    
+    .hero-section .btn-outline-primary:hover {
+        background: white;
+        color: var(--primary);
+    }
+    
+    .hero-section .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .hero-section .card-body {
+        color: white;
     }
 </style>

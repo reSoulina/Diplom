@@ -1,22 +1,141 @@
+/* site.css */
+/* Дополнительные стили для кастомизации */
+
+/* Плавная прокрутка */
 html {
-  font-size: 14px;
+    scroll-behavior: smooth;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Улучшенные карточки товаров */
+.product-card {
+    transition: all 0.2s ease;
+    border: 1px solid #e9ecef;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+/* Стили для изображений */
+.img-cover {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Кастомные отступы */
+.section-spacing {
+    padding: 4rem 0;
 }
 
-body {
-  margin-bottom: 60px;
+/* Анимации */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Кастомные скроллбары */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-dark);
+    }
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.2rem;
+    }
+
+    .display-5 {
+        font-size: 1.8rem;
+    }
+
+    .btn-lg {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+
+    /* Увеличиваем фото на мобильных */
+    .product-image-container {
+        height: 200px !important;
+    }
+}
+
+/* Стили для форм */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--gray-800);
+}
+
+/* Улучшенные таблицы */
+.table-hover tbody tr:hover {
+    background-color: rgba(var(--primary), 0.05);
+}
+
+/* Загрузочные состояния */
+.loading-spinner {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid rgba(var(--primary), 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Улучшенные тени для карточек */
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Контейнер для фото товаров */
+.product-image-container {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Уменьшаем анимацию при наведении на кнопки */
+.btn {
+    transition: all 0.2s ease !important;
+}
+
+    .btn:hover {
+        transform: translateY(-1px) !important;
+    }

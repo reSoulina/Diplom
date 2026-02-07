@@ -342,3 +342,6 @@ app.MapGet("/debug/db", async (ApplicationDbContext db, IConfiguration config) =
 });
 
 app.Run();
+
+// Добавьте ЭТУ СТРОКУ в самый конец файла Program.cs
+public partial class Program { }
