@@ -9,8 +9,6 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\xunit.runne
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\xunit.runner.reporters.netcoreapp10.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\xunit.runner.utility.netcoreapp10.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db
-D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-shm
-D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-wal
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.exe
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.deps.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.runtimeconfig.json
@@ -523,3 +521,5 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\refint\WebD
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.pdb
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\WebDesignerSystem.genruntimeconfig.cache
 D:\диплом\WebDesignerSystem\WebDesignerSystem\obj\Debug\net8.0\ref\WebDesignerSystem.dll
+D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-shm
+D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db-wal

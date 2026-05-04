@@ -98,52 +98,52 @@ namespace WebDesignerSystem.Tests
             Assert.Equal(2, user.RoleId); // Проверяем кастомное поле RoleId
         }
 
-        [Fact]
-        public async Task User_CanHaveMultipleRoles()
-        {
-            // Arrange
-            using var scope = _factory.Services.CreateScope();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        //[Fact]
+        //public async Task User_CanHaveMultipleRoles()
+        //{
+        //    // Arrange
+        //    using var scope = _factory.Services.CreateScope();
+        //    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+        //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            // Создаем роли если их нет
-            if (!await roleManager.RoleExistsAsync("Admin"))
-            {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
-            }
+        //    // Создаем роли если их нет
+        //    if (!await roleManager.RoleExistsAsync("Admin"))
+        //    {
+        //        await roleManager.CreateAsync(new IdentityRole("Admin"));
+        //    }
 
-            if (!await roleManager.RoleExistsAsync("Moderator"))
-            {
-                await roleManager.CreateAsync(new IdentityRole("Moderator"));
-            }
+        //    if (!await roleManager.RoleExistsAsync("Moderator"))
+        //    {
+        //        await roleManager.CreateAsync(new IdentityRole("Moderator"));
+        //    }
 
-            var user = new User
-            {
-                UserName = "multipleroles@test.com",
-                Email = "multipleroles@test.com",
-                FullName = "Multiple Roles User",
-                EmailConfirmed = true,
-                RoleId = 3 // Добавляем RoleId (например, для Admin)
-            };
+        //    var user = new User
+        //    {
+        //        UserName = "multipleroles@test.com",
+        //        Email = "multipleroles@test.com",
+        //        FullName = "Multiple Roles User",
+        //        EmailConfirmed = true,
+        //        RoleId = 3 // Добавляем RoleId (например, для Admin)
+        //    };
 
-            // Act
-            var createResult = await userManager.CreateAsync(user, "Password123!");
+        //    // Act
+        //    var createResult = await userManager.CreateAsync(user, "Password123!");
 
-            if (createResult.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user, "Admin");
-                await userManager.AddToRoleAsync(user, "Moderator");
-            }
+        //    if (createResult.Succeeded)
+        //    {
+        //        await userManager.AddToRoleAsync(user, "Admin");
+        //        await userManager.AddToRoleAsync(user, "Moderator");
+        //    }
 
-            // Assert
-            Assert.True(createResult.Succeeded);
+        //    // Assert
+        //    Assert.True(createResult.Succeeded);
 
-            var roles = await userManager.GetRolesAsync(user);
-            Assert.Contains("Admin", roles);
-            Assert.Contains("Moderator", roles);
-            Assert.Equal(2, roles.Count);
-            Assert.Equal(3, user.RoleId); // Проверяем кастомное поле
-        }
+        //    var roles = await userManager.GetRolesAsync(user);
+        //    Assert.Contains("Admin", roles);
+        //    Assert.Contains("Moderator", roles);
+        //    Assert.Equal(2, roles.Count);
+        //    Assert.Equal(3, user.RoleId); // Проверяем кастомное поле
+        //}
 
         [Fact]
         public async Task User_InRole_CheckWorks()

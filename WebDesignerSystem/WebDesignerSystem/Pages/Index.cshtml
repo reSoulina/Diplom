@@ -4,218 +4,100 @@
     ViewData["Title"] = "Информационная система веб-дизайнера";
 }
 
-<!-- Герой секция -->
-<section class="hero-section py-5 mb-5">
+<!-- Герой секция - обновлённая -->
+<section class="hero-section-new">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4">Создаём цифровые решения, которые работают</h1>
-                <p class="lead mb-4">Профессиональный веб-дизайн, разработка сайтов и консультации от опытного специалиста с 5-летним опытом.</p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a asp-page="/Catalog/Index" class="btn btn-primary btn-lg px-4">
-                        <i class="bi bi-grid me-2"></i>Смотреть каталог
-                    </a>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <a asp-page="/Account/Login" class="btn btn-outline-primary btn-lg px-4">
-                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти в систему
-                        </a>
-                    }
-                </div>
-            </div>
-            <div class="col-lg-6 mt-4 mt-lg-0">
-                <div class="card border-0 shadow-lg">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="bi bi-laptop text-primary fs-2"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">50+ проектов</h5>
-                                <p class="text-muted mb-0">Успешно реализовано</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="bi bi-star text-success fs-2"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">100% гарантия</h5>
-                                <p class="text-muted mb-0">Качества и сроков</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
-                                <i class="bi bi-clock text-warning fs-2"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Поддержка 24/7</h5>
-                                <p class="text-muted mb-0">После сдачи проекта</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="hero-content">
+            <h1>МЕГА КРУТОЙ<br>ДИЗАЙНЕР</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Творец, кастомщик и создатель неповторимых дизайнов.<br>
+                Превращаю ваши идеи в реальность.
+            </p>
+            <div class="hero-divider"></div>
+            <div class="hero-buttons">
+                <button class="btn-hero-primary" onclick="location.href='/Catalog/Index'">
+                    <i class="bi bi-grid me-2"></i>Смотреть работы
+                </button>
+                <a href="#services" class="btn-hero-secondary">
+                    <i class="bi bi-arrow-down me-2"></i>Узнать больше
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- О дизайнере -->
-<section class="py-5">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h2 class="display-5 fw-bold mb-3">О дизайнере</h2>
-                <p class="lead text-muted">Профессиональный подход к каждому проекту</p>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-8 mb-4 mb-lg-0">
-                <div class="card h-100">
-                    <div class="card-body p-4 d-flex flex-column justify-content-center">
-                        <div class="row align-items-center">
-                            <div class="col-md-4 mb-4 mb-md-0 text-center">
-                                <!-- Простое фото без круга -->
-                                <div class="mb-3">
-                                    <img src="~/images/profile_photo.png" 
-                                         class="img-fluid rounded" 
-                                         alt="Иван Дизайнеров"
-                                         style="max-width: 200px;"
-                                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';">
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <!-- Имя перенесено сюда -->
-                                <h3 class="mb-2">Иван Дизайнеров</h3>
-                                <p class="text-muted mb-4">Веб-дизайнер с 5-летним опытом</p>
-                                
-                                <p class="mb-4">Специализируюсь на создании современных и функциональных веб-сайтов. Работал с более чем 50 клиентами из различных сфер бизнеса.</p>
-                                
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>UI/UX дизайн</li>
-                                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Логотипы</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Адаптивная верстка</li>
-                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Консультации</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- КАРТОЧКА ДИЗАЙНЕРА С ФОТО СЛЕВА -->
+<div id="services" class="d-flex justify-content-center">
+    <div class="designer-card-horizontal">
+        <div class="designer-card-container">
+            <!-- Левая часть: фото на всю высоту -->
+            <div class="designer-photo-side">
+                <img src="~/images/profile_photo.jpg" 
+                     alt="Прохорова София"
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
             </div>
             
-            <div class="col-lg-4">
-                <div class="card h-100">
-                    <div class="card-body p-4 d-flex flex-column justify-content-center">
-                        <div>
-                            <h4 class="mb-4"><i class="bi bi-telephone me-2"></i>Контакты</h4>
-                            
-                            <div class="mb-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-3">
-                                        <i class="bi bi-envelope text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block">Email</small>
-                                        <strong>designer@example.com</strong>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-success bg-opacity-10 p-2 rounded-circle me-3">
-                                        <i class="bi bi-phone text-success"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block">Телефон</small>
-                                        <strong>+7 (999) 123-45-67</strong>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-warning bg-opacity-10 p-2 rounded-circle me-3">
-                                        <i class="bi bi-clock text-warning"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block">Часы работы</small>
-                                        <strong>Пн-Пт: 9:00 - 18:00</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <hr class="my-4">
-                            
-                            <h5 class="mb-3">Быстрый старт</h5>
-                            <div class="d-grid gap-2">
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a asp-page="/Catalog/Index" class="btn btn-primary">
-                                        <i class="bi bi-grid me-2"></i>Смотреть каталог
-                                    </a>
-                                    @if (User.IsInRole("Client"))
-                                    {
-                                        <a asp-page="/Client/Services" class="btn btn-outline-primary">
-                                            <i class="bi bi-calendar-plus me-2"></i>Запись на консультацию
-                                        </a>
-                                    }
-                                }
-                                else
-                                {
-                                    <a asp-page="/Account/Register" class="btn btn-primary">
-                                        <i class="bi bi-person-plus me-2"></i>Зарегистрироваться
-                                    </a>
-                                    <a asp-page="/Account/Login" class="btn btn-outline-primary">
-                                        <i class="bi bi-box-arrow-in-right me-2"></i>Войти в систему
-                                    </a>
-                                }
-                            </div>
-                        </div>
+            <!-- Правая часть: информация -->
+            <div class="designer-info-side">
+                <div class="about-title">О ДИЗАЙНЕРЕ</div>
+                <h2 class="designer-name">Прохорова София</h2>
+                <p class="designer-position">Мега крутой дизайнер, творец и кастомщик</p>
+                <p class="designer-bio">
+                    Создаю оригинальные и неповторимые дизайны для чего угодно.
+                    Продаю уже имеющиеся крутые вещи, предметы и аксессуары.
+                    Работаю по вашим запросам.
+                    Создам невероятное по вашему прототипу или предложу интересное решение.
+                </p>
+                
+                <!-- Контакты -->
+                <div class="designer-contacts">
+                    <div class="contact-item-simple">
+                        <i class="bi bi-envelope"></i>
+                        <span>designer@gmail.com</span>
                     </div>
+                    <div class="contact-item-simple">
+                        <i class="bi bi-phone"></i>
+                        <span>+7 (999) 123-45-67</span>
+                    </div>
+                    <div class="contact-item-simple">
+                        <i class="bi bi-clock"></i>
+                        <span>Пн-Пт: 9:00 - 18:00</span>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Блок УСЛУГИ -->
+<section class="services-section">
+    <div class="container">
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-palette"></i>
                 </div>
+                <h4>Веб-дизайн</h4>
+                <p>Создание уникального дизайна под ваш бренд</p>
+                <button class="btn-service" onclick="location.href='/Catalog/Index'">ПОДРОБНЕЕ</button>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-code-slash"></i>
+                </div>
+                <h4>Мерч</h4>
+                <p>Товары с оригинальным дизайном</p>
+                <button class="btn-service" onclick="location.href='/Catalog/Index'">ПОДРОБНЕЕ</button>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-chat-dots"></i>
+                </div>
+                <h4>Консультации</h4>
+                <p>Профессиональные консультации по проекту</p>
+                <button class="btn-service" onclick="location.href='/Catalog/Index'">ПОДРОБНЕЕ</button>
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    .hero-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: var(--radius);
-        margin-top: 1rem;
-    }
-    
-    .hero-section h1, .hero-section p {
-        color: white;
-    }
-    
-    .hero-section .btn-primary {
-        background: white;
-        color: var(--primary);
-    }
-    
-    .hero-section .btn-outline-primary {
-        border-color: white;
-        color: white;
-    }
-    
-    .hero-section .btn-outline-primary:hover {
-        background: white;
-        color: var(--primary);
-    }
-    
-    .hero-section .card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .hero-section .card-body {
-        color: white;
-    }
-</style>
