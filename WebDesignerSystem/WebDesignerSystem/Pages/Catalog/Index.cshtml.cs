@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,10 +11,12 @@ namespace WebDesignerSystem.Pages.Catalog
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public List<Product> Products { get; set; } = new();
@@ -69,13 +72,66 @@ namespace WebDesignerSystem.Pages.Catalog
 
         public async Task<IActionResult> OnPostAddToCartAsync(int id)
         {
+            // Проверяем, авторизован ли пользователь
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToPage("/Account/Login", new { returnUrl = "/Catalog" });
             }
 
-            // Здесь будет логика добавления в корзину
-            TempData["Message"] = "Товар добавлен в корзину";
+            // Получаем текущего пользователя
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+
+            // Находим товар
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                TempData["ErrorMessage"] = "Товар не найден";
+                return RedirectToPage();
+            }
+
+            // Проверяем, что это товар, а не услуга
+            if (product.IsService)
+            {
+                TempData["ErrorMessage"] = "Это услуга. Запишитесь на неё через форму записи.";
+                return RedirectToPage();
+            }
+
+            // Проверяем, активен ли товар
+            if (!product.IsActive)
+            {
+                TempData["ErrorMessage"] = "Этот товар временно недоступен";
+                return RedirectToPage();
+            }
+
+            // Ищем товар в корзине пользователя
+            var cartItem = await _context.CartItems
+                .FirstOrDefaultAsync(c => c.UserId == user.Id && c.ProductId == id);
+
+            if (cartItem == null)
+            {
+                // Добавляем новый товар в корзину
+                cartItem = new CartItem
+                {
+                    UserId = user.Id,
+                    ProductId = id,
+                    Quantity = 1,
+                    AddedAt = DateTime.UtcNow
+                };
+                _context.CartItems.Add(cartItem);
+                TempData["SuccessMessage"] = "Товар добавлен в корзину";
+            }
+            else
+            {
+                // Увеличиваем количество существующего товара
+                cartItem.Quantity++;
+                TempData["SuccessMessage"] = "Количество товара увеличено";
+            }
+
+            await _context.SaveChangesAsync();
             return RedirectToPage();
         }
     }

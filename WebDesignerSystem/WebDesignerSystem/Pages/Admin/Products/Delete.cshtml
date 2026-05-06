@@ -10,9 +10,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="card">
+            <div class="admin-delete-card">
                 <div class="card-header bg-danger text-white">
-                    <h4 class="mb-0">@ViewData["Title"]</h4>
+                    <h4 class="mb-0"><i class="bi bi-trash me-2"></i>@ViewData["Title"]</h4>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-warning">
@@ -21,14 +21,14 @@
                     </div>
 
                     <div class="mb-4">
-                        <h5>Информация о товаре:</h5>
+                        <h5 class="mb-3">Информация о товаре:</h5>
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <strong>Название:</strong> @Model.Product.Name
                             </li>
                             <li class="list-group-item">
                                 <strong>Тип:</strong> 
-                                <span class="badge @(Model.Product.IsService ? "bg-info" : "bg-success")">
+                                <span class="admin-badge @(Model.Product.IsService ? "admin-badge-info" : "admin-badge-success")">
                                     @(Model.Product.IsService ? "Услуга" : "Товар")
                                 </span>
                             </li>
@@ -45,11 +45,11 @@
                                 <strong>Статус:</strong> 
                                 @if (Model.Product.IsActive)
                                 {
-                                    <span class="badge bg-success">Активно</span>
+                                    <span class="admin-badge admin-badge-success">Активно</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-danger">Неактивно</span>
+                                    <span class="admin-badge admin-badge-danger">Неактивно</span>
                                 }
                             </li>
                         </ul>
@@ -63,8 +63,7 @@
                                 <img src="@Model.Product.ImageUrl" 
                                      alt="@Model.Product.Name" 
                                      class="img-thumbnail"
-                                     style="max-width: 200px; max-height: 200px;"
-                                     onerror="this.src='/images/no-image.png'" />
+                                     style="max-width: 200px; max-height: 200px; background: rgba(255,255,255,0.9);" />
                             </div>
                         </div>
                     }

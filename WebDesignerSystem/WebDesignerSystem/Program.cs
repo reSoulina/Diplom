@@ -16,7 +16,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
-    options.Password.RequireNonAlphanumeric = false; // Можно включить если нужно
+    options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 6;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -37,11 +37,19 @@ if (!Directory.Exists(uploadsPath))
     Console.WriteLine($"Создана папка для загрузок: {uploadsPath}");
 }
 
+// Создаем папку для фото дизайнера
+var designerPhotosPath = Path.Combine(app.Environment.WebRootPath, "images", "designer");
+if (!Directory.Exists(designerPhotosPath))
+{
+    Directory.CreateDirectory(designerPhotosPath);
+    Console.WriteLine($"Создана папка для фото дизайнера: {designerPhotosPath}");
+}
+
 // Путь к БД для отладки
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 Console.WriteLine($"Connection string: {connectionString}");
 
-// Создаем БД при первом запуске
+// Инициализация базы данных
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -53,21 +61,157 @@ using (var scope = app.Services.CreateScope())
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
         // Получаем путь к файлу БД
-        var dbPath = connectionString.Replace("Data Source=", "").Trim();
+        var dbPath = connectionString?.Replace("Data Source=", "").Trim();
         Console.WriteLine($"DB Path: {dbPath}");
 
-        // Создаем папку если нужно
-        var directory = Path.GetDirectoryName(dbPath);
-        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+        // Создаем папку для БД если нужно
+        if (!string.IsNullOrEmpty(dbPath))
         {
-            Directory.CreateDirectory(directory);
-            Console.WriteLine($"Created directory: {directory}");
+            var directory = Path.GetDirectoryName(dbPath);
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+                Console.WriteLine($"Created directory: {directory}");
+            }
         }
 
-        // Создаем БД
-        var created = context.Database.EnsureCreated();
-        Console.WriteLine($"Database created: {created}");
+        // ============================================================
+        // ПРОВЕРКА И СОЗДАНИЕ ВСЕХ НЕОБХОДИМЫХ ТАБЛИЦ
+        // ============================================================
+        try
+        {
+            await context.Database.OpenConnectionAsync();
 
+            // Список таблиц для проверки и создания (без IF NOT EXISTS)
+            var tablesToCreate = new Dictionary<string, string>
+            {
+                { "DesignerProfiles", @"
+                    CREATE TABLE IF NOT EXISTS ""DesignerProfiles"" (
+                        ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_DesignerProfiles"" PRIMARY KEY AUTOINCREMENT,
+                        ""Name"" TEXT NOT NULL,
+                        ""Position"" TEXT NULL,
+                        ""Bio"" TEXT NULL,
+                        ""Email"" TEXT NULL,
+                        ""Phone"" TEXT NULL,
+                        ""WorkingHours"" TEXT NULL,
+                        ""PhotoUrl"" TEXT NULL,
+                        ""PhotoPath"" TEXT NULL,
+                        ""UpdatedAt"" TEXT NOT NULL
+                    )"
+                },
+                { "ClientProfiles", @"
+                    CREATE TABLE IF NOT EXISTS ""ClientProfiles"" (
+                        ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_ClientProfiles"" PRIMARY KEY AUTOINCREMENT,
+                        ""UserId"" TEXT NOT NULL,
+                        ""FullName"" TEXT NULL,
+                        ""Phone"" TEXT NULL,
+                        ""DeliveryAddress"" TEXT NULL,
+                        ""UpdatedAt"" TEXT NOT NULL
+                    )"
+                },
+                { "CartItems", @"
+                    CREATE TABLE IF NOT EXISTS ""CartItems"" (
+                        ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_CartItems"" PRIMARY KEY AUTOINCREMENT,
+                        ""UserId"" TEXT NOT NULL,
+                        ""ProductId"" INTEGER NOT NULL,
+                        ""Quantity"" INTEGER NOT NULL,
+                        ""AddedAt"" TEXT NOT NULL
+                    )"
+                }
+            };
+
+            foreach (var table in tablesToCreate)
+            {
+                Console.WriteLine($"Проверка/создание таблицы {table.Key}...");
+                using (var createCommand = context.Database.GetDbConnection().CreateCommand())
+                {
+                    createCommand.CommandText = table.Value;
+                    await createCommand.ExecuteNonQueryAsync();
+                }
+                Console.WriteLine($"✅ Таблица {table.Key} проверена/создана");
+            }
+
+            context.Database.CloseConnection();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при проверке/создании таблиц: {ex.Message}");
+        }
+
+        // ============================================================
+        // СОЗДАНИЕ ОСТАЛЬНЫХ ТАБЛИЦ (если их нет)
+        // ============================================================
+        var created = context.Database.EnsureCreated();
+        Console.WriteLine($"Database EnsureCreated: {created}");
+
+        // ============================================================
+        // ДОБАВЛЕНИЕ НЕДОСТАЮЩИХ СТОЛБЦОВ В СУЩЕСТВУЮЩИЕ ТАБЛИЦЫ
+        // ============================================================
+        try
+        {
+            await context.Database.OpenConnectionAsync();
+
+            // Добавляем столбец UpdatedAt в таблицу Orders, если его нет
+            var addColumnOrders = @"
+                SELECT COUNT(*) FROM pragma_table_info('Orders') WHERE name='UpdatedAt';
+            ";
+            using (var cmd = context.Database.GetDbConnection().CreateCommand())
+            {
+                cmd.CommandText = addColumnOrders;
+                var count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                if (count == 0)
+                {
+                    Console.WriteLine("Добавление столбца UpdatedAt в Orders...");
+                    using (var alterCmd = context.Database.GetDbConnection().CreateCommand())
+                    {
+                        alterCmd.CommandText = "ALTER TABLE Orders ADD COLUMN UpdatedAt TEXT NOT NULL DEFAULT '2024-01-01 00:00:00'";
+                        await alterCmd.ExecuteNonQueryAsync();
+                    }
+                    Console.WriteLine("✅ Столбец UpdatedAt добавлен в Orders");
+                }
+            }
+
+            // Добавляем столбцы в ServiceAppointments
+            var columnsToAdd = new Dictionary<string, string>
+            {
+                { "Format", "TEXT NOT NULL DEFAULT 'online'" },
+                { "ContactInfo", "TEXT NULL" },
+                { "Address", "TEXT NULL" },
+                { "UpdatedAt", "TEXT NOT NULL DEFAULT '2024-01-01 00:00:00'" }
+            };
+
+            foreach (var col in columnsToAdd)
+            {
+                var checkColumn = $@"
+                    SELECT COUNT(*) FROM pragma_table_info('ServiceAppointments') WHERE name='{col.Key}';
+                ";
+                using (var checkCmd = context.Database.GetDbConnection().CreateCommand())
+                {
+                    checkCmd.CommandText = checkColumn;
+                    var exists = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
+                    if (exists == 0)
+                    {
+                        Console.WriteLine($"Добавление столбца {col.Key} в ServiceAppointments...");
+                        using (var alterCmd = context.Database.GetDbConnection().CreateCommand())
+                        {
+                            alterCmd.CommandText = $"ALTER TABLE ServiceAppointments ADD COLUMN \"{col.Key}\" {col.Value}";
+                            await alterCmd.ExecuteNonQueryAsync();
+                        }
+                        Console.WriteLine($"✅ Столбец {col.Key} добавлен в ServiceAppointments");
+                    }
+                }
+            }
+
+            context.Database.CloseConnection();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при добавлении столбцов: {ex.Message}");
+        }
+
+        // ============================================================
+        // ИНИЦИАЛИЗАЦИЯ ДАННЫХ (роли, пользователи, и т.д.)
+        // ============================================================
         // Создаем роли Identity
         if (!await roleManager.RoleExistsAsync("Client"))
         {
@@ -81,28 +225,36 @@ using (var scope = app.Services.CreateScope())
             Console.WriteLine("Created Identity role: Designer");
         }
 
-        // Создаем ваши кастомные роли (ОБНОВЛЕНО: добавлены Description)
+        // Создаем ваши кастомные роли
         if (!context.Roles.Any())
         {
             context.Roles.AddRange(
-                new Role
-                {
-                    Id = 1,
-                    Name = "Client",
-                    Description = "Роль клиента" // Добавлено
-                },
-                new Role
-                {
-                    Id = 2,
-                    Name = "Designer",
-                    Description = "Роль дизайнера" // Добавлено
-                }
+                new Role { Id = 1, Name = "Client", Description = "Роль клиента" },
+                new Role { Id = 2, Name = "Designer", Description = "Роль дизайнера" }
             );
             await context.SaveChangesAsync();
             Console.WriteLine("Created custom roles with descriptions");
         }
 
-        // Создаем пользователей
+        // Создаем профиль дизайнера, если его нет
+        if (!context.DesignerProfiles.Any())
+        {
+            context.DesignerProfiles.Add(new DesignerProfile
+            {
+                Name = "Прохорова София",
+                Position = "Мега крутой дизайнер, творец и кастомщик",
+                Bio = "Создаю оригинальные и неповторимые дизайны для чего угодно.\nПродаю уже имеющиеся крутые вещи, предметы и аксессуары.\nРаботаю по вашим запросам.\nСоздам невероятное по вашему прототипу или предложу интересное решение.",
+                Email = "designer@gmail.com",
+                Phone = "+7 (999) 123-45-67",
+                WorkingHours = "Пн-Пт: 9:00 - 18:00",
+                PhotoUrl = "/images/profile_photo.jpg",
+                UpdatedAt = DateTime.UtcNow
+            });
+            await context.SaveChangesAsync();
+            Console.WriteLine("Created designer profile");
+        }
+
+        // Создаем пользователей (если нет)
         if (!context.Users.Any())
         {
             var designer = new User
@@ -146,146 +298,42 @@ using (var scope = app.Services.CreateScope())
             }
         }
 
-        // Создаем статусы заказов (ОБНОВЛЕНО: добавлены Description)
+        // Создаем статусы заказов (если нет)
         if (!context.OrderStatuses.Any())
         {
             context.OrderStatuses.AddRange(
-                new OrderStatus
-                {
-                    Id = 1,
-                    Name = "В очереди",
-                    Color = "#ffc107",
-                    Description = "Заказ ожидает обработки" // Добавлено
-                },
-                new OrderStatus
-                {
-                    Id = 2,
-                    Name = "В процессе",
-                    Color = "#17a2b8",
-                    Description = "Заказ в работе" // Добавлено
-                },
-                new OrderStatus
-                {
-                    Id = 3,
-                    Name = "Готов",
-                    Color = "#28a745",
-                    Description = "Заказ выполнен" // Добавлено
-                },
-                new OrderStatus
-                {
-                    Id = 4,
-                    Name = "Отменен",
-                    Color = "#dc3545",
-                    Description = "Заказ отменен" // Добавлено
-                }
+                new OrderStatus { Id = 1, Name = "В очереди", Color = "#ffc107", Description = "Заказ ожидает обработки" },
+                new OrderStatus { Id = 2, Name = "В процессе", Color = "#17a2b8", Description = "Заказ в работе" },
+                new OrderStatus { Id = 3, Name = "Готов", Color = "#28a745", Description = "Заказ выполнен" },
+                new OrderStatus { Id = 4, Name = "Отменен", Color = "#dc3545", Description = "Заказ отменен" }
             );
             await context.SaveChangesAsync();
             Console.WriteLine("Created order statuses");
         }
 
-        // Создаем категории (ОБНОВЛЕНО: добавлены Description)
+        // Создаем категории (если нет)
         if (!context.Categories.Any())
         {
             context.Categories.AddRange(
-                new Category
-                {
-                    Id = 1,
-                    Name = "Шаблоны сайтов",
-                    Description = "Готовые шаблоны для различных типов сайтов"
-                },
-                new Category
-                {
-                    Id = 2,
-                    Name = "Дизайн логотипов",
-                    Description = "Разработка уникальных логотипов"
-                },
-                new Category
-                {
-                    Id = 3,
-                    Name = "Консультации",
-                    Description = "Профессиональные консультации по веб-дизайну"
-                },
-                new Category
-                {
-                    Id = 4,
-                    Name = "Разработка под ключ",
-                    Description = "Полный цикл разработки сайтов"
-                }
+                new Category { Id = 1, Name = "Шаблоны сайтов", Description = "Готовые шаблоны для различных типов сайтов" },
+                new Category { Id = 2, Name = "Дизайн логотипов", Description = "Разработка уникальных логотипов" },
+                new Category { Id = 3, Name = "Консультации", Description = "Профессиональные консультации по веб-дизайну" },
+                new Category { Id = 4, Name = "Разработка под ключ", Description = "Полный цикл разработки сайтов" }
             );
             await context.SaveChangesAsync();
             Console.WriteLine("Created categories");
         }
 
-        // Создаем продукты
+        // Создаем продукты (если нет)
         if (!context.Products.Any())
         {
             context.Products.AddRange(
-                new Product
-                {
-                    Name = "Шаблон интернет-магазина",
-                    Description = "Готовый адаптивный шаблон для интернет-магазина с корзиной и фильтрами",
-                    Price = 5000,
-                    CategoryId = 1,
-                    IsService = false,
-                    IsActive = true,
-                    ImageUrl = "https://via.placeholder.com/400x300/007bff/ffffff?text=Магазин",
-                    CreatedAt = DateTime.UtcNow
-                },
-                new Product
-                {
-                    Name = "Логотип для кафе",
-                    Description = "Уникальный дизайн логотипа для кофейни или ресторана",
-                    Price = 3000,
-                    CategoryId = 2,
-                    IsService = false,
-                    IsActive = true,
-                    ImageUrl = "https://via.placeholder.com/400x300/28a745/ffffff?text=Логотип",
-                    CreatedAt = DateTime.UtcNow
-                },
-                new Product
-                {
-                    Name = "Консультация по веб-дизайну",
-                    Description = "Индивидуальная консультация 1 час по вопросам веб-дизайна",
-                    Price = 1500,
-                    CategoryId = 3,
-                    IsService = true,
-                    IsActive = true,
-                    ImageUrl = "https://via.placeholder.com/400x300/17a2b8/ffffff?text=Консультация",
-                    CreatedAt = DateTime.UtcNow
-                },
-                new Product
-                {
-                    Name = "Корпоративный сайт",
-                    Description = "Разработка корпоративного сайта под ключ",
-                    Price = 25000,
-                    CategoryId = 1,
-                    IsService = true,
-                    IsActive = true,
-                    ImageUrl = "https://via.placeholder.com/400x300/6f42c1/ffffff?text=Корпоративный",
-                    CreatedAt = DateTime.UtcNow
-                },
-                new Product
-                {
-                    Name = "Фирменный бланк",
-                    Description = "Дизайн фирменного бланка для документов",
-                    Price = 2000,
-                    CategoryId = 2,
-                    IsService = false,
-                    IsActive = true,
-                    ImageUrl = "https://via.placeholder.com/400x300/fd7e14/ffffff?text=Бланк",
-                    CreatedAt = DateTime.UtcNow
-                },
-                new Product
-                {
-                    Name = "Лендинг страница",
-                    Description = "Создание одностраничного сайта для продвижения услуги",
-                    Price = 15000,
-                    CategoryId = 1,
-                    IsService = true,
-                    IsActive = true,
-                    ImageUrl = "https://via.placeholder.com/400x300/dc3545/ffffff?text=Лендинг",
-                    CreatedAt = DateTime.UtcNow
-                }
+                new Product { Name = "Шаблон интернет-магазина", Description = "Готовый адаптивный шаблон для интернет-магазина с корзиной и фильтрами", Price = 5000, CategoryId = 1, IsService = false, IsActive = true, ImageUrl = "https://via.placeholder.com/400x300/007bff/ffffff?text=Магазин", CreatedAt = DateTime.UtcNow },
+                new Product { Name = "Логотип для кафе", Description = "Уникальный дизайн логотипа для кофейни или ресторана", Price = 3000, CategoryId = 2, IsService = false, IsActive = true, ImageUrl = "https://via.placeholder.com/400x300/28a745/ffffff?text=Логотип", CreatedAt = DateTime.UtcNow },
+                new Product { Name = "Консультация по веб-дизайну", Description = "Индивидуальная консультация 1 час по вопросам веб-дизайна", Price = 1500, CategoryId = 3, IsService = true, IsActive = true, ImageUrl = "https://via.placeholder.com/400x300/17a2b8/ffffff?text=Консультация", CreatedAt = DateTime.UtcNow },
+                new Product { Name = "Корпоративный сайт", Description = "Разработка корпоративного сайта под ключ", Price = 25000, CategoryId = 1, IsService = true, IsActive = true, ImageUrl = "https://via.placeholder.com/400x300/6f42c1/ffffff?text=Корпоративный", CreatedAt = DateTime.UtcNow },
+                new Product { Name = "Фирменный бланк", Description = "Дизайн фирменного бланка для документов", Price = 2000, CategoryId = 2, IsService = false, IsActive = true, ImageUrl = "https://via.placeholder.com/400x300/fd7e14/ffffff?text=Бланк", CreatedAt = DateTime.UtcNow },
+                new Product { Name = "Лендинг страница", Description = "Создание одностраничного сайта для продвижения услуги", Price = 15000, CategoryId = 1, IsService = true, IsActive = true, ImageUrl = "https://via.placeholder.com/400x300/dc3545/ffffff?text=Лендинг", CreatedAt = DateTime.UtcNow }
             );
             await context.SaveChangesAsync();
             Console.WriteLine("Created products with images");
@@ -311,7 +359,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -325,6 +372,13 @@ app.MapGet("/debug/db", async (ApplicationDbContext db, IConfiguration config) =
     var fullPath = Path.GetFullPath(dbPath);
     var exists = File.Exists(fullPath);
 
+    var designerProfilesCount = 0;
+    var clientProfilesCount = 0;
+    var cartItemsCount = 0;
+    try { designerProfilesCount = await db.DesignerProfiles.CountAsync(); } catch { designerProfilesCount = -1; }
+    try { clientProfilesCount = await db.ClientProfiles.CountAsync(); } catch { clientProfilesCount = -1; }
+    try { cartItemsCount = await db.CartItems.CountAsync(); } catch { cartItemsCount = -1; }
+
     return Results.Ok(new
     {
         ConnectionString = connectionString,
@@ -335,6 +389,9 @@ app.MapGet("/debug/db", async (ApplicationDbContext db, IConfiguration config) =
         CurrentDirectory = Directory.GetCurrentDirectory(),
         UsersCount = await db.Users.CountAsync(),
         RolesCount = await db.Roles.CountAsync(),
+        DesignerProfilesCount = designerProfilesCount,
+        ClientProfilesCount = clientProfilesCount,
+        CartItemsCount = cartItemsCount,
         ProductsCount = await db.Products.CountAsync(),
         CategoriesCount = await db.Categories.CountAsync(),
         StatusesCount = await db.OrderStatuses.CountAsync()
@@ -343,5 +400,4 @@ app.MapGet("/debug/db", async (ApplicationDbContext db, IConfiguration config) =
 
 app.Run();
 
-// Добавьте ЭТУ СТРОКУ в самый конец файла Program.cs
 public partial class Program { }

@@ -1,0 +1,101 @@
+﻿@page "{id:int}"
+@model WebDesignerSystem.Pages.Client.BookServiceModel
+@{
+    ViewData["Title"] = "Запись на услугу";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="admin-form-container">
+                <h1 class="form-title">Запись на услугу</h1>
+                <h3 class="mb-3 text-white">@Model.Service.Name</h3>
+                <p>@Model.Service.Description</p>
+                <p><strong>Цена:</strong> @Model.Service.Price.ToString("C")</p>
+                <hr />
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div asp-validation-summary="All" class="alert alert-danger"></div>
+                }
+
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="Service.Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Дата *</label>
+                        <input type="date" asp-for="Input.AppointmentDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                        <span asp-validation-for="Input.AppointmentDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Время *</label>
+                        <select asp-for="Input.AppointmentTime" class="form-select" required>
+                            <option value="">-- Выберите время --</option>
+                            @for (int i = 9; i <= 18; i++)
+                            {
+                                <option value="@i:00">@i:00</option>
+                                <option value="@i:30">@i:30</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Input.AppointmentTime" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Формат *</label>
+                        <select asp-for="Input.Format" class="form-select" id="formatSelect" required>
+                            <option value="">-- Выберите формат --</option>
+                            <option value="online">Онлайн (консультация, связь по телефону)</option>
+                            <option value="offline">Офлайн (встреча в Уфе)</option>
+                        </select>
+                        <span asp-validation-for="Input.Format" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Контактный телефон (для онлайн)</label>
+                        <input asp-for="Input.ContactInfo" class="form-control" />
+                        <span class="form-text text-white">Можно изменить, если нужно</span>
+                        <span asp-validation-for="Input.ContactInfo" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Адрес (для офлайн)</label>
+                        <input asp-for="Input.Address" class="form-control" />
+                        <span class="form-text text-white">Можно изменить</span>
+                        <span asp-validation-for="Input.Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Примечания</label>
+                        <textarea asp-for="Input.Notes" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="/Catalog/Index" class="btn btn-secondary">Отмена</a>
+                        <button type="submit" class="btn btn-primary">Записаться</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('formatSelect').addEventListener('change', function() {
+            var online = document.getElementById('onlineFields');
+            var offline = document.getElementById('offlineFields');
+            if (this.value === 'online') {
+                online.style.display = 'block';
+                offline.style.display = 'none';
+            } else if (this.value === 'offline') {
+                online.style.display = 'none';
+                offline.style.display = 'block';
+            } else {
+                online.style.display = 'none';
+                offline.style.display = 'none';
+            }
+        });
+    </script>
+}

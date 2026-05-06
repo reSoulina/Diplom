@@ -19,16 +19,8 @@ namespace WebDesignerSystem.Pages.Account
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("Пользователь вышел из системы.");
-
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToPage("/Index");
-            }
+            _logger.LogInformation("User logged out.");
+            return RedirectToPage("/Index");
         }
     }
 }

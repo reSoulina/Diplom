@@ -1,4 +1,42 @@
 ﻿@page
 @model WebDesignerSystem.Pages.Client.MyOrdersModel
 @{
+    ViewData["Title"] = "Мои заказы";
 }
+
+<div class="container">
+
+    <div class="catalog-header-section">
+        <div class="title-wrapper">
+            <h1 class="mb-0">Мои заказы</h1>
+        </div>
+    </div>
+
+
+    @if (Model.Orders.Any())
+    {
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>№</th><th>Дата</th><th>Сумма</th><th>Статус</th><th></th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>@order.TotalAmount.ToString("C")</td>
+                            <td><span class="admin-badge" style="background-color:@order.CurrentStatus.Color">@order.CurrentStatus.Name</span></td>
+                            <td><a asp-page="/Client/OrderDetails" asp-route-id="@order.Id" class="admin-action-btn">Детали</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="admin-empty-state"><i class="bi bi-bag-x"></i><h3>У вас пока нет заказов</h3><a href="/Catalog/Index" class="btn-primary">Перейти в каталог</a></div>
+    }
+</div>

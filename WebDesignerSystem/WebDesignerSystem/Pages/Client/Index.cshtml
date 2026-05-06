@@ -1,49 +1,134 @@
 ﻿@page
 @attribute [Authorize(Roles = "Client")]
 @using Microsoft.AspNetCore.Authorization
+@model WebDesignerSystem.Pages.Client.IndexModel
 @{
     ViewData["Title"] = "Кабинет клиента";
 }
 
 <div class="container">
-    <h1>Кабинет клиента</h1>
-    
-    <div class="row mt-4">
-         <div class="col-md-4 mb-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <i class="bi bi-box-seam" style="font-size: 3rem; color: #0d6efd;"></i>
-                    <h4 class="card-title mt-3">Каталог</h4>
-                    <p class="card-text">Просмотр товаров и услуг</p>
-                    <div class="d-grid gap-2">
-                        <a asp-page="/Catalog/Index" class="btn btn-primary">Перейти</a>
+    <div class="text-center col-md-8s">
+        <div class="admin-title-wrapper d-inline-block">
+            <h1>Кабинет клиента</h1>
+        </div>
+    </div>
+
+    <div class="client-profile" style="margin-top: 1rem">
+        @if (Model.ClientProfile != null)
+        {
+            <div>
+                <div class="row">
+                    <div class="client-data-card">
+                        <h3>Мои данные</h3>
+                    
+                        <div class="info-row">
+                            <div class="info-label">Полное имя</div>
+                            <div class="info-value">@Model.ClientProfile.FullName</div>
+                        </div>
+                    
+                        <div class="info-row">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">@User.Identity?.Name</div>
+                        </div>
+                    
+                        <div class="info-row">
+                            <div class="info-label">Телефон</div>
+                            <div class="info-value">
+                                @if (string.IsNullOrEmpty(Model.ClientProfile.Phone))
+                                {
+                                    <span class="empty-value">Не указан</span>
+                                }
+                                else
+                                {
+                                    @Model.ClientProfile.Phone
+                                }
+                            </div>
+                        </div>
+                    
+                        <div class="info-row">
+                            <div class="info-label">Адрес доставки</div>
+                            <div class="info-value">
+                                @if (string.IsNullOrEmpty(Model.ClientProfile.DeliveryAddress))
+                                {
+                                    <span class="empty-value">Не указан</span>
+                                }
+                                else
+                                {
+                                    @Model.ClientProfile.DeliveryAddress
+                                }
+                            </div>
+                        </div>
+                    
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-page="/Catalog/Index" class="btn btn-secondary">Перейти в каталог</a>
+                            <a asp-page="/Client/Profile/Index" class="btn btn-primary">
+                                <i class="bi bi-pencil me-2"></i>Редактировать
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="admin-empty-state">
+                <i class="bi bi-person-circle"></i>
+                <h3>Заполните профиль</h3>
+                <p>Добавьте свои данные для удобства оформления заказов</p>
+                <a asp-page="/Client/Profile/Index" class="btn-primary" style="background: white; color: var(--primary); padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none;">
+                    <i class="bi bi-pencil me-2"></i>Заполнить профиль
+                </a>
+            </div>
+        }
+        <div>
+            <div>
+                <div class="client-rect-card">
+                    <div class="row">
+                        <div class="col-md-4 admin-rect-icon">
+                            <i class="bi bi-cart-check"></i>
+                        </div>
+                            <h4 class="admin-rect-title">Оформить заказ</h4>
+                    </div>
+                    <div class="client-rect-btn">
+                        <a asp-page="/Client/Cart/Index">
+                            Перейти <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="client-rect-card">
+                    <div class="row">
+                        <div class="admin-rect-icon">
+                            <i class="bi bi-bag"></i>
+                        </div>
+                        <h4 class="admin-rect-title">Мои заказы</h4>
+                    </div>
+                    <div class="client-rect-btn">
+                        <a asp-page="/Client/MyOrders">
+                            Перейти <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="client-rect-card">
+                    <div class="row">
+                        <div class="admin-rect-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h4 class="admin-rect-title">Мои записи</h4>
+                    </div>
+                        
+                    <div class="client-rect-btn">
+                        <a asp-page="/Client/MyAppointments">
+                            Перейти <i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        
-       @*  <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Мои заказы</h5>
-                </div>
-                <div class="card-body">
-                    <p>История и текущие заказы</p>
-                    <a href="#" class="btn btn-primary">Посмотреть</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Запись на услуги</h5>
-                </div>
-                <div class="card-body">
-                    <p>Записаться на консультацию</p>
-                    <a href="#" class="btn btn-primary">Записаться</a>
-                </div>
-            </div>
-        </div> *@
     </div>
 </div>

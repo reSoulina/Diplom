@@ -1,0 +1,46 @@
+﻿@page "{id:int}"
+@model WebDesignerSystem.Pages.Admin.Orders.DetailsModel
+@{
+    ViewData["Title"] = $"Заказ №{Model.Order.Id}";
+}
+
+<div class="container">
+    <div class="admin-header"><h1>Заказ №@Model.Order.Id</h1></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="designer-profile-card">
+                <h3>Информация</h3>
+                <div><strong>Клиент:</strong> @Model.Order.Client.FullName</div>
+                <div><strong>Email:</strong> @Model.Order.Client.Email</div>
+                <div><strong>Дата:</strong> @Model.Order.OrderDate.ToString("dd.MM.yyyy HH:mm")</div>
+                <div><strong>Сумма:</strong> @Model.Order.TotalAmount.ToString("C")</div>
+                <div><strong>Примечания:</strong> @(string.IsNullOrEmpty(Model.Order.Notes) ? "—" : Model.Order.Notes)</div>
+                <hr />
+                <form method="post" asp-page-handler="ChangeStatus">
+                    <div class="mb-3">
+                        <label>Новый статус</label>
+                        <select name="newStatusId" class="form-select">
+                            @foreach (var s in Model.Statuses)
+                            {
+                                <option value="@s.Id" selected="@(s.Id == Model.Order.CurrentStatusId)">@s.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3"><label>Комментарий</label><textarea name="comment" class="form-control" rows="2"></textarea></div>
+                    <button type="submit" class="btn btn-primary">Обновить статус</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="designer-profile-card">
+                <h3>Товары</h3>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <div class="d-flex justify-content-between mb-1">@item.Product.Name x @item.Quantity</div>
+                }
+                <hr /><div class="fw-bold">Итого: @Model.Order.TotalAmount.ToString("C")</div>
+            </div>
+        </div>
+    </div>
+    <a asp-page="./Index" class="btn btn-secondary mt-3">Назад</a>
+</div>

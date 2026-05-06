@@ -27,6 +27,10 @@ namespace WebDesignerSystem.Models.Entities
         [Display(Name = "Текущий статус")]
         public int CurrentStatusId { get; set; } = 1;
 
+        // Order.cs
+        [Display(Name = "Дата обновления")]
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
         [Display(Name = "Примечания")]
         public string? Notes { get; set; }
 

@@ -1,0 +1,115 @@
+﻿@page
+@attribute [Authorize(Roles = "Client")]
+@using Microsoft.AspNetCore.Authorization
+@model WebDesignerSystem.Pages.Client.Cart.IndexModel
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<div class="container">
+    <div class="catalog-header-section">
+        <div class="title-wrapper">
+            <h1 class="mb-0">Корзина</h1>
+        </div>
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success" style="background: rgba(16, 185, 129, 0.2); border: none; color: white;">
+            @TempData["Message"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" style="background: rgba(239, 68, 68, 0.2); border: none; color: white;">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (Model.CartItems.Any())
+    {
+        <div class="cart">
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th>Сумма</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        @if (!string.IsNullOrEmpty(item.Product.ImageUrl))
+                                        {
+                                            <img src="@item.Product.ImageUrl" alt="@item.Product.Name" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;" />
+                                        }
+                                        else
+                                        {
+                                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="bi bi-box-seam"></i>
+                                            </div>
+                                        }
+                                        <div>
+                                            <strong>@item.Product.Name</strong>
+                                            <br>
+                                            <small class="text-muted">Товар</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@item.Product.Price.ToString("C")</td>
+                                <td>
+                                    <form method="post" asp-page-handler="UpdateQuantity" asp-route-id="@item.Id" class="d-flex align-items-center gap-2">
+                                        <input type="number" name="quantity" value="@item.Quantity" min="1" max="99" style="width: 70px;" class="form-control" />
+                                        <button type="submit" class="admin-action-btn" title="Обновить">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>@((item.Product.Price * item.Quantity).ToString("C"))</td>
+                                <td>
+                                    <form method="post" asp-page-handler="Remove" asp-route-id="@item.Id">
+                                        <button type="submit" class="admin-action-btn danger" title="Удалить">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cart-amount">
+                <div class="admin-stat-card">
+                    <h3>@Model.TotalAmount.ToString("C")</h3>
+                    <p>Итого к оплате</p>
+                </div>
+                <div class="d-grid gap-2 mt-3">
+                    <a href="/Catalog/Index" class="btn btn-secondary btn-cart">В каталог</a>
+                    <a href="/Client/Checkout" class="btn btn-primary w-100 mt-3">Заказать</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="admin-empty-state">
+            <i class="bi bi-cart"></i>
+            <h3>Корзина пуста</h3>
+            <p>Добавьте товары из каталога</p>
+            <div class="d-grid gap-2 mt-3">
+                <a href="/Catalog/Index" class="btn btn-primary btn-cart">
+                    Перейти в каталог
+                </a>
+            </div>
+        </div>
+    }
+</div>

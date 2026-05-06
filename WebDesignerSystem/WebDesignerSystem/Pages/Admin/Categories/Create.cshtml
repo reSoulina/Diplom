@@ -10,36 +10,37 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h2>@ViewData["Title"]</h2>
+            <div class="admin-form-container">
+                <h2>@ViewData["Title"]</h2>
 
-            @if (TempData["SuccessMessage"] != null)
-            {
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    @TempData["SuccessMessage"]
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            }
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success" style="background: rgba(16, 185, 129, 0.2); border: none; color: white;">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
 
-            <form method="post">
-                <div asp-validation-summary="All" class="text-danger mb-3"></div>
-                
-                <div class="mb-3">
-                    <label asp-for="Category.Name" class="form-label">Название *</label>
-                    <input asp-for="Category.Name" class="form-control" />
-                    <span asp-validation-for="Category.Name" class="text-danger"></span>
-                </div>
-                
-                <div class="mb-3">
-                    <label asp-for="Category.Description" class="form-label">Описание</label>
-                    <textarea asp-for="Category.Description" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="Category.Description" class="text-danger"></span>
-                </div>
-                
-                <div class="d-flex justify-content-between">
-                    <a asp-page="Index" class="btn btn-secondary">Отмена</a>
-                    <button type="submit" class="btn btn-primary">Создать</button>
-                </div>
-            </form>
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Category.Name" class="form-label">Название *</label>
+                        <input asp-for="Category.Name" class="form-control" />
+                        <span asp-validation-for="Category.Name" class="text-danger" style="color: #ff9e9e !important;"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Category.Description" class="form-label">Описание</label>
+                        <textarea asp-for="Category.Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Category.Description" class="text-danger" style="color: #ff9e9e !important;"></span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="Index" class="btn btn-secondary">Отмена</a>
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

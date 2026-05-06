@@ -11,6 +11,20 @@
             <h1 class="mb-0">Каталог</h1>
         </div>
     </div>
+
+    <!-- Сообщения об успехе/ошибке -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" style="background: rgba(16, 185, 129, 0.2); border: none; color: white; margin-bottom: 1rem;">
+            <i class="bi bi-check-circle-fill me-2"></i>@TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" style="background: rgba(239, 68, 68, 0.2); border: none; color: white; margin-bottom: 1rem;">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ErrorMessage"]
+        </div>
+    }
     
     <!-- Панель фильтрации на фиолетовом фоне -->
     <div class="filter-card mb-4">
@@ -55,7 +69,7 @@
                             </span>
                             @if (product.Category != null)
                             {
-                                <small class="text-muted">@product.Category.Name</small>
+                                <small class="text-white">@product.Category.Name</small>
                             }
                         </div>
                         
@@ -87,14 +101,14 @@
                                     {
                                         @if (product.IsService)
                                         {
-                                            <a href="/Client/Services/Book?serviceId=@product.Id" 
+                                            <a href="/Client/BookService/@product.Id" 
                                                class="btn btn-primary btn-sm px-3">
                                                 <i class="bi bi-calendar-plus me-1"></i>Записаться
                                             </a>
                                         }
                                         else
                                         {
-                                            <form method="post" asp-page-handler="AddToCart" asp-route-id="@product.Id">
+                                            <form method="post" asp-page-handler="AddToCart" asp-route-id="@product.Id" class="d-inline">
                                                 <button type="submit" class="btn btn-success btn-sm px-3">
                                                     <i class="bi bi-cart-plus me-1"></i>В корзину
                                                 </button>
@@ -103,11 +117,9 @@
                                     }
                                     else
                                     {
-                                        <button class="btn btn-outline-primary btn-sm px-3" 
-                                                data-bs-toggle="tooltip" 
-                                                title="Для добавления в корзину необходимо войти">
-                                            <i class="bi bi-cart-plus me-1"></i>В корзину
-                                        </button>
+                                        <a href="/Account/Login?returnUrl=/Catalog" class="btn btn-outline-primary btn-sm px-3">
+                                            <i class="bi bi-box-arrow-in-right me-1"></i>Войти
+                                        </a>
                                     }
                                 </div>
                             </div>
@@ -165,11 +177,13 @@
 @section Scripts {
     <script>
         $(function () {
-            // Инициализация tooltips
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
+            setTimeout(function() {
+                $('.alert').fadeOut('slow');
+            }, 5000);
         });
     </script>
 }

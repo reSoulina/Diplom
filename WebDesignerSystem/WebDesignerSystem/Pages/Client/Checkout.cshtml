@@ -1,0 +1,82 @@
+﻿@page
+@model WebDesignerSystem.Pages.Client.CheckoutModel
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+<div class="container">
+    <div class="admin-header">
+        <h1 class="mb-2">Оформление заказа</h1>
+    </div>
+
+    @if (Model.CartItems.Any())
+    {
+        <form method="post">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="admin-form-container">
+                        <h3 class="form-title">Данные для доставки</h3>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" style="display: none;"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.FullName" class="form-label"></label>
+                            <input asp-for="Input.FullName" class="form-control" />
+                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                            <span class="form-text text-muted">Можно изменить, если нужно</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Phone" class="form-label"></label>
+                            <input asp-for="Input.Phone" class="form-control" />
+                            <span asp-validation-for="Input.Phone" class="text-danger"></span>
+                            <span class="form-text text-muted">Можно изменить</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Address" class="form-label"></label>
+                            <textarea asp-for="Input.Address" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                            <span class="form-text text-muted">Можно изменить</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Notes" class="form-label"></label>
+                            <textarea asp-for="Input.Notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="designer-profile-card">
+                        <h3>Ваш заказ</h3>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>@item.Product.Name x @item.Quantity</span>
+                                <span>@((item.Product.Price * item.Quantity).ToString("C"))</span>
+                            </div>
+                        }
+                        <hr />
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Итого:</span>
+                            <span>@Model.TotalAmount.ToString("C")</span>
+                        </div>
+                        <hr />
+                        <button type="submit" class="btn btn-primary w-100">Подтвердить заказ</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="admin-empty-state">
+            <i class="bi bi-cart-x"></i>
+            <h3>Корзина пуста</h3>
+            <a href="/Catalog/Index" class="btn-primary">Вернуться в каталог</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

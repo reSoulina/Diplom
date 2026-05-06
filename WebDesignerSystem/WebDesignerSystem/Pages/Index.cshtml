@@ -1,77 +1,73 @@
 ﻿@page
-@model IndexModel
+@model WebDesignerSystem.Pages.IndexModel
 @{
     ViewData["Title"] = "Информационная система веб-дизайнера";
 }
 
-<!-- Герой секция - обновлённая -->
-<section class="hero-section-new">
-    <div class="container">
-        <div class="hero-content">
-            <h1>МЕГА КРУТОЙ<br>ДИЗАЙНЕР</h1>
-            <div class="hero-divider"></div>
-            <p class="hero-description">
-                Творец, кастомщик и создатель неповторимых дизайнов.<br>
-                Превращаю ваши идеи в реальность.
-            </p>
-            <div class="hero-divider"></div>
-            <div class="hero-buttons">
-                <button class="btn-hero-primary" onclick="location.href='/Catalog/Index'">
-                    <i class="bi bi-grid me-2"></i>Смотреть работы
-                </button>
-                <a href="#services" class="btn-hero-secondary">
-                    <i class="bi bi-arrow-down me-2"></i>Узнать больше
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- КАРТОЧКА ДИЗАЙНЕРА С ФОТО СЛЕВА -->
-<div id="services" class="d-flex justify-content-center">
-    <div class="designer-card-horizontal">
-        <div class="designer-card-container">
-            <!-- Левая часть: фото на всю высоту -->
-            <div class="designer-photo-side">
-                <img src="~/images/profile_photo.jpg" 
-                     alt="Прохорова София"
-                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
-            </div>
-            
-            <!-- Правая часть: информация -->
-            <div class="designer-info-side">
-                <div class="about-title">О ДИЗАЙНЕРЕ</div>
-                <h2 class="designer-name">Прохорова София</h2>
-                <p class="designer-position">Мега крутой дизайнер, творец и кастомщик</p>
-                <p class="designer-bio">
-                    Создаю оригинальные и неповторимые дизайны для чего угодно.
-                    Продаю уже имеющиеся крутые вещи, предметы и аксессуары.
-                    Работаю по вашим запросам.
-                    Создам невероятное по вашему прототипу или предложу интересное решение.
+@if (Model.DesignerProfile != null)
+{
+    <!-- Герой секция -->
+    <section class="hero-section-new">
+        <div class="container">
+            <div class="hero-content">
+                <h1>МЕГА КРУТОЙ<br>ДИЗАЙНЕР</h1>
+                <div class="hero-divider"></div>
+                <p class="hero-description">
+                    Творец, кастомщик и создатель неповторимых дизайнов.<br>
+                    Превращаю ваши идеи в реальность.
                 </p>
+                <div class="hero-buttons">
+                    <button class="btn-hero-primary" onclick="location.href='/Catalog/Index'">
+                        <i class="bi bi-grid me-2"></i>Смотреть работы
+                    </button>
+                    <a href="#services" class="btn-hero-secondary">
+                        <i class="bi bi-arrow-down me-2"></i>Узнать больше
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАРТОЧКА ДИЗАЙНЕРА С ФОТО СЛЕВА -->
+    <div class="d-flex justify-content-center">
+        <div class="designer-card-horizontal">
+            <div class="designer-card-container">
+                <div class="designer-photo-side">
+                    <img src="@(Model.DesignerProfile.PhotoUrl ?? "/images/profile_photo.jpg")" 
+                         alt="@Model.DesignerProfile.Name"
+                         onerror="this.onerror=null; this.src='/images/profile_photo.jpg';">
+                </div>
                 
-                <!-- Контакты -->
-                <div class="designer-contacts">
-                    <div class="contact-item-simple">
-                        <i class="bi bi-envelope"></i>
-                        <span>designer@gmail.com</span>
-                    </div>
-                    <div class="contact-item-simple">
-                        <i class="bi bi-phone"></i>
-                        <span>+7 (999) 123-45-67</span>
-                    </div>
-                    <div class="contact-item-simple">
-                        <i class="bi bi-clock"></i>
-                        <span>Пн-Пт: 9:00 - 18:00</span>
-                    </div>
-                </div>                
+                <div class="designer-info-side">
+                    <div class="about-title">О ДИЗАЙНЕРЕ</div>
+                    <h2 class="designer-name">@Model.DesignerProfile.Name</h2>
+                    <p class="designer-position">@Model.DesignerProfile.Position</p>
+                    <p class="designer-bio">
+                        @Model.DesignerProfile.Bio
+                    </p>
+                    
+                    <div class="designer-contacts">
+                        <div class="contact-item-simple">
+                            <i class="bi bi-envelope"></i>
+                            <span>@Model.DesignerProfile.Email</span>
+                        </div>
+                        <div class="contact-item-simple">
+                            <i class="bi bi-phone"></i>
+                            <span>@Model.DesignerProfile.Phone</span>
+                        </div>
+                        <div class="contact-item-simple">
+                            <i class="bi bi-clock"></i>
+                            <span>@Model.DesignerProfile.WorkingHours</span>
+                        </div>
+                    </div>                
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 
 <!-- Блок УСЛУГИ -->
-<section class="services-section">
+<section id="services" class="services-section">
     <div class="container">
         <div class="services-grid">
             <div class="service-item">

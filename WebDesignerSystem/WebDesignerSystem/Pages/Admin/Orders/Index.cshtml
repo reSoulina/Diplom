@@ -1,0 +1,30 @@
+﻿@page
+@model WebDesignerSystem.Pages.Admin.Orders.IndexModel
+@{
+    ViewData["Title"] = "Заказы клиентов";
+}
+<div class="container">
+    <div class="catalog-header-section">
+        <div class="title-wrapper">
+            <h1 class="mb-0">Заказы клиентов</h1>
+        </div>
+    </div>
+    <div class="admin-table-container">
+        <table class="admin-table">
+            <thead><tr><th>№</th><th>Клиент</th><th>Дата</th><th>Сумма</th><th>Статус</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.Client.FullName</td>
+                        <td>@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@order.TotalAmount.ToString("C")</td>
+                        <td><span class="admin-badge" style="background-color:@order.CurrentStatus.Color">@order.CurrentStatus.Name</span></td>
+                        <td><a asp-page="./Details" asp-route-id="@order.Id" class="admin-action-btn">Детали</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -21,7 +21,9 @@ namespace WebDesignerSystem.Data
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<OrderStatusHistory> OrderStatusHistories { get; set; }
         public DbSet<ServiceAppointment> ServiceAppointments { get; set; }
-
+        public DbSet<DesignerProfile> DesignerProfiles { get; set; }
+        public DbSet<ClientProfile> ClientProfiles { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

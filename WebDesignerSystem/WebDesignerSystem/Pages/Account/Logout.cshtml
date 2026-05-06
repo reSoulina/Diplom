@@ -13,3 +13,10 @@
         <a asp-page="/Index" class="btn btn-primary">На главную</a>
     </div>
 </div>
+
+<script>
+    // Дополнительная очистка куки на клиенте
+    document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+</script>

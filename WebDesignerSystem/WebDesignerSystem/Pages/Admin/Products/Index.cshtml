@@ -8,46 +8,46 @@
 }
 
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h1 class="mb-2">Товары и услуги</h1>
-            <p class="text-muted mb-0">Управление каталогом</p>
+    <!-- Заголовок на фиолетовом фоне -->
+    <div class="admin-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="title-wrapper">
+                <h1 class="mb-2">Товары и услуги</h1>
+            </div>
+            <a asp-page="Create" class="btn btn-success" style="background: #10b981; border: none;">
+                <i class="bi bi-plus-circle me-2"></i> Добавить
+            </a>
         </div>
-        <a asp-page="Create" class="btn btn-success">
-            <i class="bi bi-plus-circle me-2"></i> Добавить
-        </a>
     </div>
 
     <!-- Фильтры -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <form method="get" class="row g-3">
-                <div class="col-md-4">
-                    <label class="form-label">Категория</label>
-                    <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select">
-                        <option value="">Все категории</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label">Тип</label>
-                    <select asp-for="ProductType" class="form-select">
-                        <option value="">Все</option>
-                        <option value="product">Товары</option>
-                        <option value="service">Услуги</option>
-                    </select>
-                </div>
-                <div class="col-md-4 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100">Применить</button>
-                </div>
-            </form>
-        </div>
+    <div class="admin-form-container mb-4">
+        <form method="get" class="row g-3">
+            <div class="col-md-5">
+                <label class="form-label">Категория</label>
+                <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select">
+                    <option value="">Все категории</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label class="form-label">Тип</label>
+                <select asp-for="ProductType" class="form-select">
+                    <option value="">Все</option>
+                    <option value="product">Товары</option>
+                    <option value="service">Услуги</option>
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Применить</button>
+            </div>
+        </form>
     </div>
 
     @if (Model.Products.Any())
     {
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="table-light">
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
                     <tr>
                         <th style="width: 70px;">Фото</th>
                         <th>Название</th>
@@ -62,18 +62,15 @@
                     @foreach (var product in Model.Products)
                     {
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 @if (!string.IsNullOrEmpty(product.ImageUrl))
                                 {
-                                    <img src="@product.ImageUrl" alt="@product.Name" 
-                                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
-                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjBGMkY0Ii8+CjxwYXRoIGQ9Ik0yMCAyNUMjMCAyMi4yMzg3IDIyLjIzODcgMjAgMjUgMjBDMjcuNzYxMyAyMCAzMCAyMi4yMzg3IDMwIDI1QzMwIDI3Ljc2MTMgMjcuNzYxMyAzMCAyNSAzMEMyMi4yMzg3IDMwIDIwIDI3Ljc2MTMgMjAgMjVaTTQwIDQwSDIwQzE4Ljg5NTQgNDAgMTggMzkuMTA0NiAxOCAzOFYzNC44MjZDMjEuOTI3NCAzMS41NDY3IDMzLjA3MjYgMzEuNTQ2NyAzNyAzNC44MjZWMzhDMzcgMzkuMTA0NiAzNi4xMDQ2IDQwIDM1IDQwWiIgZmlsbD0iI0NEQ1RDRSIvPgo8L3N2Zz4K'">
+                                    <img src="@product.ImageUrl" alt="@product.Name" class="admin-table-img" />
                                 }
                                 else
                                 {
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-center" 
-                                         style="width: 50px; height: 50px;">
-                                        <i class="bi @(product.IsService ? "bi-calendar-check" : "bi-box-seam") text-muted"></i>
+                                    <div class="admin-table-img d-flex align-items-center justify-content-center bg-light" style="background: rgba(255,255,255,0.1) !important;">
+                                        <i class="bi @(product.IsService ? "bi-calendar-check" : "bi-box-seam")" style="color: rgba(255,255,255,0.5); font-size: 1.5rem;"></i>
                                     </div>
                                 }
                             </td>
@@ -82,21 +79,21 @@
                                 @if (!string.IsNullOrEmpty(product.Description))
                                 {
                                     <br>
-                                    <small class="text-muted">@(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)</small>
+                                    <small style="color: rgba(255,255,255,0.6);">@(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)</small>
                                 }
                             </td>
                             <td class="align-middle">
                                 @if (product.Category != null)
                                 {
-                                    <span class="badge bg-secondary">@product.Category.Name</span>
+                                    <span class="admin-badge admin-badge-secondary">@product.Category.Name</span>
                                 }
                                 else
                                 {
-                                    <span class="text-muted">—</span>
+                                    <span style="color: rgba(255,255,255,0.5);">—</span>
                                 }
                             </td>
                             <td class="align-middle">
-                                <span class="badge @(product.IsService ? "bg-info" : "bg-success")">
+                                <span class="admin-badge @(product.IsService ? "admin-badge-info" : "admin-badge-success")">
                                     @(product.IsService ? "Услуга" : "Товар")
                                 </span>
                             </td>
@@ -106,24 +103,20 @@
                             <td class="align-middle">
                                 @if (product.IsActive)
                                 {
-                                    <span class="badge bg-success">Активно</span>
+                                    <span class="admin-badge admin-badge-success">Активно</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-danger">Неактивно</span>
+                                    <span class="admin-badge admin-badge-danger">Неактивно</span>
                                 }
                             </td>
                             <td class="align-middle">
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <a asp-page="Edit" asp-route-id="@product.Id" class="btn btn-outline-primary" 
-                                       title="Редактировать">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a asp-page="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger"
-                                       title="Удалить">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </div>
+                                <a asp-page="Edit" asp-route-id="@product.Id" class="admin-action-btn" title="Редактировать">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a asp-page="Delete" asp-route-id="@product.Id" class="admin-action-btn danger" title="Удалить">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -134,40 +127,38 @@
         <!-- Статистика -->
         <div class="row mt-4">
             <div class="col-md-3">
-                <div class="stat-card">
+                <div class="admin-stat-card">
                     <h3>@Model.Products.Count()</h3>
-                    <p class="text-muted mb-0">Всего</p>
+                    <p>Всего</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card">
+                <div class="admin-stat-card">
                     <h3>@Model.Products.Count(p => !p.IsService)</h3>
-                    <p class="text-muted mb-0">Товаров</p>
+                    <p>Товаров</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card">
+                <div class="admin-stat-card">
                     <h3>@Model.Products.Count(p => p.IsService)</h3>
-                    <p class="text-muted mb-0">Услуг</p>
+                    <p>Услуг</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card">
+                <div class="admin-stat-card">
                     <h3>@Model.Products.Count(p => p.IsActive)</h3>
-                    <p class="text-muted mb-0">Активных</p>
+                    <p>Активных</p>
                 </div>
             </div>
         </div>
     }
     else
     {
-        <div class="text-center py-5">
-            <div class="mb-4">
-                <i class="bi bi-box display-1 text-muted"></i>
-            </div>
-            <h3 class="mb-3">Товары не найдены</h3>
-            <p class="text-muted mb-4">Добавьте первый товар или измените параметры фильтрации</p>
-            <a asp-page="Create" class="btn btn-primary">
+        <div class="admin-empty-state">
+            <i class="bi bi-box"></i>
+            <h3>Товары не найдены</h3>
+            <p>Добавьте первый товар или измените параметры фильтрации</p>
+            <a asp-page="Create" class="btn-primary" style="background: white; color: var(--primary); padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none;">
                 <i class="bi bi-plus-circle me-2"></i>Добавить товар
             </a>
         </div>

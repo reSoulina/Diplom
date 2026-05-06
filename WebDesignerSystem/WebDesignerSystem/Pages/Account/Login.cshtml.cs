@@ -28,9 +28,6 @@ namespace WebDesignerSystem.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
-
         public class InputModel
         {
             [Required]
@@ -47,11 +44,6 @@ namespace WebDesignerSystem.Pages.Account
 
         public void OnGet(string returnUrl = null)
         {
-            if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
-
             ReturnUrl = returnUrl ?? Url.Content("~/");
         }
 
@@ -61,29 +53,24 @@ namespace WebDesignerSystem.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-                if (user != null)
+                var result = await _signInManager.PasswordSignInAsync(
+                    Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                if (result.Succeeded)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(
-                        user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    _logger.LogInformation("User logged in.");
 
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var role = await _context.Roles.FindAsync(user.RoleId);
 
-                        // Редирект в зависимости от роли из таблицы Roles
-                        var role = await _context.Roles.FindAsync(user.RoleId);
-                        if (role?.Name == "Designer")
-                            return LocalRedirect("/Admin/Index");
-                        else
-                            return LocalRedirect("/Client/Index");
-                    }
-
-                    ModelState.AddModelError(string.Empty, "Неверный email или пароль");
-                    return Page();
+                    if (role?.Name == "Designer")
+                        return LocalRedirect("/Admin/Index");
+                    else
+                        return LocalRedirect("/Client/Index");
                 }
 
-                ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                ModelState.AddModelError(string.Empty, "Неверный логин или пароль.");
+                return Page();
             }
 
             return Page();

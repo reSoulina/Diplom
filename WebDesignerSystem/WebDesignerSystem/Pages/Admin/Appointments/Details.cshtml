@@ -1,0 +1,55 @@
+﻿@page "{id:int}"
+@model WebDesignerSystem.Pages.Admin.Appointments.DetailsModel
+@{
+    ViewData["Title"] = "Детали записи";
+}
+
+<div class="container">
+    <div class="admin-header">
+        <h1 class="mb-2">Детали записи</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="designer-profile-card mb-4">
+                <h3>Информация о клиенте</h3>
+                <div><strong>Имя:</strong> @Model.Appointment.Client.FullName</div>
+                <div><strong>Email:</strong> @Model.Appointment.Client.Email</div>
+                <div><strong>Телефон:</strong> @(string.IsNullOrEmpty(Model.Appointment.Client.PhoneNumber) ? "—" : Model.Appointment.Client.PhoneNumber)</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="designer-profile-card mb-4">
+                <h3>Детали записи</h3>
+                <div><strong>Услуга:</strong> @Model.Appointment.Service.Name</div>
+                <div><strong>Дата и время:</strong> @Model.Appointment.AppointmentDateTime.ToString("dd.MM.yyyy HH:mm")</div>
+                <div><strong>Формат:</strong> @(Model.Appointment.Format == "online" ? "Онлайн" : "Офлайн")</div>
+                @if (Model.Appointment.Format == "online")
+                {
+                    <div><strong>Контакт для связи:</strong> @Model.Appointment.ContactInfo</div>
+                }
+                else
+                {
+                    <div><strong>Адрес:</strong> @Model.Appointment.Address</div>
+                }
+                <div><strong>Примечания:</strong> @(string.IsNullOrEmpty(Model.Appointment.Notes) ? "—" : Model.Appointment.Notes)</div>
+                <hr />
+                <form method="post" asp-page-handler="ChangeStatus">
+                    <div class="mb-3">
+                        <label class="form-label">Изменить статус</label>
+                        <select name="newStatus" class="form-select">
+                            <option value="pending" selected="@(Model.Appointment.Status == "pending")">Ожидает</option>
+                            <option value="confirmed" selected="@(Model.Appointment.Status == "confirmed")">Подтверждена</option>
+                            <option value="completed" selected="@(Model.Appointment.Status == "completed")">Выполнена</option>
+                            <option value="cancelled" selected="@(Model.Appointment.Status == "cancelled")">Отменена</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Обновить статус</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a asp-page="./Index" class="btn btn-secondary">Назад к списку</a>
+    </div>
+</div>

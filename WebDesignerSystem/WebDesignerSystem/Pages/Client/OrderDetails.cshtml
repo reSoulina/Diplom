@@ -1,0 +1,31 @@
+﻿@page "{id:int}"
+@model WebDesignerSystem.Pages.Client.OrderDetailsModel
+@{
+    ViewData["Title"] = $"Заказ №{Model.Order.Id}";
+}
+
+<div class="container">
+    <div class="admin-header"><h1>Заказ №@Model.Order.Id</h1></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="designer-profile-card">
+                <h3>Информация</h3>
+                <div>Дата: @Model.Order.OrderDate.ToString("dd.MM.yyyy HH:mm")</div>
+                <div>Статус: <span class="admin-badge" style="background-color:@Model.Order.CurrentStatus.Color">@Model.Order.CurrentStatus.Name</span></div>
+                <div>Сумма: @Model.Order.TotalAmount.ToString("C")</div>
+                <div>Комментарий: @(string.IsNullOrEmpty(Model.Order.Notes) ? "—" : Model.Order.Notes)</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="designer-profile-card">
+                <h3>Товары</h3>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <div class="d-flex justify-content-between mb-1"><span>@item.Product.Name x @item.Quantity</span><span>@((item.UnitPrice * item.Quantity).ToString("C"))</span></div>
+                }
+                <hr /><div class="fw-bold">Итого: @Model.Order.TotalAmount.ToString("C")</div>
+            </div>
+        </div>
+    </div>
+    <a asp-page="/Client/MyOrders" class="btn btn-secondary mt-3">Назад</a>
+</div>
