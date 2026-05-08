@@ -1,4 +1,3 @@
-wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\back.jpg
 wwwroot\images\no-image.png
@@ -63,9 +62,16 @@ wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\uploads\products\10261d52-3ea6-41df-a2b4-5431b6137489.png
+wwwroot\uploads\products\13dd29a0-8f1e-42ba-a557-2930d1438c13.jpg
 wwwroot\uploads\products\19176779-f0b1-4dc8-92e5-2f7e2a766118.png
+wwwroot\uploads\products\1d687358-f752-4d12-97bc-c4ddced6ad9d.jpg
 wwwroot\uploads\products\21dd5229-9dd5-4166-ad3a-5dca5a80e435.png
 wwwroot\uploads\products\5851c92a-7789-4ed2-8815-a80955f6f0e1.png
+wwwroot\uploads\products\66670a7b-54a0-4e89-bbac-aadfd9b10727.jpg
 wwwroot\uploads\products\6de399ba-3306-49ba-9898-9b2b0e722e78.png
+wwwroot\uploads\products\8dbf2be7-5313-4a9b-91a0-933f226fe532.jpg
 wwwroot\uploads\products\a3561e71-f4bd-48b4-80e1-eee74d97e8d8.png
+wwwroot\uploads\products\a3b931cf-6fb2-4615-942a-2d7d3235c1cf.jpg
+wwwroot\uploads\products\b995cc6c-ad39-46c0-b79f-d7ff81e45aaf.jpg
 wwwroot\uploads\products\c30de78f-f4d5-4fc0-8c2f-b1d33943290a.png
+wwwroot\css\site.css

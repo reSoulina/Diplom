@@ -139,7 +139,7 @@ h1, h2, h3, h4, h5, h6 {
         transform: translateY(-1px);
     }
 
-/* Êíîïêè - îáùèå ñòèëè */
+/* Êíîïêè */
 .btn {
     font-weight: 500;
     border-radius: var(--radius-sm);
@@ -147,37 +147,21 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.2s ease;
     border: none;
 }
-
-    /* Óáèğàåì ÷åğíóş ğàìêó ó âñåõ êíîïîê */
-    /* ===== ÓÁÈĞÀÅÌ ×ÅĞÍÓŞ ĞÀÌÊÓ Ó ÂÑÅÕ ÊÍÎÏÎÊ ===== */
-    button:focus,
-    button:active,
-    .btn:focus,
-    .btn:active,
-    .btn-hero-primary:focus,
-    .btn-hero-primary:active,
-    .btn-hero-secondary:focus,
-    .btn-hero-secondary:active,
-    .btn-service:focus,
-    .btn-service:active,
-    .btn-primary:focus,
-    .btn-primary:active,
-    .btn-outline-primary:focus,
-    .btn-outline-primary:active,
-    .navbar .btn-primary:focus,
-    .navbar .btn-primary:active,
-    .admin-rect-btn:focus,
-    .admin-rect-btn:active,
-    .btn-admin:focus,
-    .btn-admin:active,
-    .admin-action-btn:focus,
-    .admin-action-btn:active,
-    .btn-edit-profile:focus,
-    .btn-edit-profile:active,
-    .btn-change-password:focus,
-    .btn-change-password:active,
-    a:focus,
-    a:active {
+    /* Óáèğàåì ÷åğíóş ğàìêó */
+    button:focus, button:active,
+    .btn:focus, .btn:active,
+    .btn-hero-primary:focus, .btn-hero-primary:active,
+    .btn-hero-secondary:focus, .btn-hero-secondary:active,
+    .btn-service:focus, .btn-service:active,
+    .btn-primary:focus, .btn-primary:active,
+    .btn-outline-primary:focus, .btn-outline-primary:active,
+    .navbar .btn-primary:focus, .navbar .btn-primary:active,
+    .admin-rect-btn:focus, .admin-rect-btn:active,
+    .btn-admin:focus, .btn-admin:active,
+    .admin-action-btn:focus, .admin-action-btn:active,
+    .btn-edit-profile:focus, .btn-edit-profile:active,
+    .btn-change-password:focus, .btn-change-password:active,
+    a:focus, a:active {
         outline: none !important;
         box-shadow: none !important;
     }
@@ -335,12 +319,12 @@ footer {
     border-radius: 50px;
     transition: all 0.3s ease;
     cursor: pointer;
+    border: none;
 }
 
 .btn-hero-primary {
     background: white;
     color: var(--primary);
-    border: none;
 }
 
     .btn-hero-primary:hover {
@@ -512,7 +496,6 @@ footer {
     transition: all 0.2s ease;
     cursor: pointer;
     display: inline-block;
-    border: none;
 }
 
     .btn-service:hover {
@@ -580,18 +563,6 @@ footer {
     }
 
 /* ===== ÊÀÒÀËÎÃ ===== */
-.title-wrapper {
-    background: var(--primary);
-    border-radius: var(--radius);
-    padding: 0.5rem 2rem;
-    display: inline-block;
-    margin-bottom: 1rem;
-}
-
-    .title-wrapper h1 {
-        color: white;
-    }
-
 .catalog-page .card {
     background: var(--primary);
     color: white;
@@ -611,6 +582,7 @@ footer {
 
 .catalog-page .product-image-container {
     background-color: rgba(255,255,255,0.95);
+    cursor: pointer;
 }
 
 .filter-card {
@@ -654,48 +626,20 @@ footer {
         color: white;
     }
 
-
-.client-profile {
-    display:flex;
-    flex-direction:row;
-    gap: 2rem;
-    justify-content:center;
-}
-
-.client-rect-card {
+/* Óíèâåğñàëüíàÿ ïëàøêà çàãîëîâêà */
+.title-wrapper {
     background: var(--primary);
     border-radius: var(--radius);
-    display: flex;
-    flex-direction: column;
-    height: 9rem;
-    width: 15rem;
-    padding-left: 3rem;
-    gap: 1rem;
-    margin-bottom: 2.4rem;
-    justify-content: center;
+    padding: 0.5rem 2rem;
+    display: inline-block;
+    margin-bottom: 1rem;
 }
-    .client-rect-card h4 {
-        width: 8rem;
-        padding-top: 0.5rem;
+
+    .title-wrapper h1 {
+        color: white;
     }
 
-.client-rect-btn {
-        display: flex;
-        background: white;
-        padding: 0.4rem 1rem;
-        border-radius: 30px;
-        width: 10rem;
-        justify-content: center;
-        justify-self: center;
-}
-    .client-rect-btn a {
-        color: var(--primary);
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-decoration: none;
-    }
-
-/* ===== ÏĞßÌÎÓÃÎËÜÍÛÅ ÊÀĞÒÎ×ÊÈ ÄËß ÓÏĞÀÂËÅÍÈß ===== */
+/* ===== ÀÄÌÈÍ-ÏÀÍÅËÜ, ÊËÈÅÍÒÑÊÀß ×ÀÑÒÜ, ÎÁÙÈÅ ÊÀĞÒÎ×ÊÈ ===== */
 .admin-rect-card {
     background: var(--primary);
     border-radius: var(--radius);
@@ -715,7 +659,7 @@ footer {
 .admin-rect-icon {
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -745,22 +689,18 @@ footer {
 .admin-rect-btn {
     background: white;
     color: var(--primary);
-    border: none;
     padding: 0.4rem 1rem;
     border-radius: 30px;
     font-size: 0.75rem;
     font-weight: 600;
-    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    text-decoration: none;
     white-space: nowrap;
 }
 
     .admin-rect-btn:hover {
         background: var(--secondary);
-        color: var(--primary);
         transform: translateY(-1px);
     }
 
@@ -770,7 +710,6 @@ footer {
     padding: 0.6rem 1.5rem;
     border-radius: 30px;
     font-weight: 600;
-    transition: all 0.3s ease;
     display: inline-block;
 }
 
@@ -818,7 +757,6 @@ footer {
     color: white;
     padding: 0.4rem 0.8rem;
     border-radius: 8px;
-    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
@@ -834,27 +772,6 @@ footer {
         background: #ef4444;
         color: white;
     }
-
-.cart {
-    display:flex;
-    flex-direction: row;
-    width: 80rem;
-    justify-content: space-between;
-}
-
-.cart-amount {
-    display: flex;
-    flex-direction: column;
-    width: 25rem;
-    padding-left: 1rem;
-    background: var(--primary);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-top: 0;
-}
-.btn-cart {
-    margin-top: -0.5rem;
-}
 
 .admin-stat-card {
     background: var(--primary);
@@ -911,7 +828,6 @@ footer {
     .admin-form-container .btn-secondary {
         background: rgba(255,255,255,0.2);
         color: white;
-        border: none;
     }
 
         .admin-form-container .btn-secondary:hover {
@@ -1060,6 +976,7 @@ footer {
     padding: 2rem;
     color: white;
 }
+
     .designer-profile-card h3 {
         color: white;
     }
@@ -1189,123 +1106,68 @@ footer {
         font-style: italic;
     }
 
-/* ===== ÀÄÀÏÒÈÂÍÎÑÒÜ ===== */
-@media (max-width: 768px) {
-    .hero-section-new {
-        padding: 1.5rem 0;
-        max-width: 90%;
-        margin: 0 auto 2rem;
-    }
-
-        .hero-section-new h1 {
-            font-size: 1.6rem;
-        }
-
-    .hero-description {
-        font-size: 0.85rem;
-        padding: 0 1rem;
-    }
-
-    .hero-buttons {
-        gap: 0.75rem;
-    }
-
-    .btn-hero-primary, .btn-hero-secondary {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    .designer-card-container {
-        flex-direction: column;
-    }
-
-    .designer-photo-side {
-        min-width: 100%;
-        padding: 1rem;
-    }
-
-        .designer-photo-side img {
-            max-height: 250px;
-            width: 100%;
-        }
-
-    .designer-info-side {
-        padding: 1.5rem;
-    }
-
-        .designer-info-side .designer-name {
-            font-size: 1.4rem;
-        }
-
-        .designer-info-side .about-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-    .designer-contacts {
-        justify-content: center;
-        margin-top: 1rem;
-    }
-
-    .contact-item-simple {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    .service-item {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .services-grid {
-        gap: 1rem;
-    }
-
-    .admin-form-container {
-        padding: 1.5rem;
-    }
-
-        .admin-form-container h3 p h1 {
-            color: white;
-        }
-
-        .admin-table {
-            font-size: 0.85rem;
-        }
-
-        .admin-table thead th, .admin-table tbody td {
-            padding: 0.75rem;
-        }
-
-    .admin-action-btn span {
-        display: none;
-    }
-
-    .admin-stat-card h3 {
-        font-size: 1rem;
-    }
-
-    .designer-profile-card {
-        padding: 1.5rem;
-        text-align: center;
-    }
-
-    .designer-profile-avatar {
-        margin-bottom: 1rem;
-    }
-
-    .designer-profile-contacts {
-        justify-content: center;
-    }
-
-    .btn-edit-profile, .btn-change-password {
-        margin: 0.25rem;
-    }
-
-    .admin-title-wrapper h1 {
-        font-size: 1.4rem;
-    }
+/* ===== ÄÎÏÎËÍÈÒÅËÜÍÛÅ ÓÒÈËÈÒÛ ===== */
+.cart {
+    display: flex;
+    flex-direction: row;
+    width: 80rem;
+    justify-content: space-between;
 }
+
+.cart-amount {
+    display: flex;
+    flex-direction: column;
+    width: 25rem;
+    padding-left: 1rem;
+    background: var(--primary);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 0;
+}
+
+.btn-cart {
+    margin-top: -0.5rem;
+}
+
+.client-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.client-rect-card {
+    background: var(--primary);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    height: 9rem;
+    width: 15rem;
+    padding-left: 3rem;
+    gap: 1rem;
+    margin-bottom: 2.4rem;
+    justify-content: center;
+}
+
+    .client-rect-card h4 {
+        width: 8rem;
+        padding-top: 0.5rem;
+    }
+
+.client-rect-btn {
+    display: flex;
+    background: white;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    width: 10rem;
+    justify-content: center;
+}
+
+    .client-rect-btn a {
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
 
 /* Óâåëè÷èâàåì øèğèíó ñòîëáöà "Êàòåãîğèÿ" â àäìèí-òàáëèöàõ */
 .admin-table th:nth-child(3),

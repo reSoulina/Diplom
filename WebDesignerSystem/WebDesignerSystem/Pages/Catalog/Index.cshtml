@@ -176,14 +176,25 @@
 
 @section Scripts {
     <script>
-        $(function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.product-image-container');
+            containers.forEach(function(container) {
+                const img = container.querySelector('img');
+                if (img) {
+                    img.style.cursor = 'pointer';
+                    img.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // Открываем изображение в новой вкладке
+                        window.open(this.src, '_blank');
+                    });
+                } else {
+                    container.style.cursor = 'pointer';
+                    container.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        window.open('/images/no-image.png', '_blank');
+                    });
+                }
             });
-            setTimeout(function() {
-                $('.alert').fadeOut('slow');
-            }, 5000);
         });
     </script>
 }

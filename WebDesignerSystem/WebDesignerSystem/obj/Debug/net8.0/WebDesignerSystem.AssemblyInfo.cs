@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebDesignerSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+863a7bb5c2566a8904723ea69ef5d97e56f97b14")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e003eb51957daf18250da7e37343fa773e58026e")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebDesignerSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebDesignerSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
