@@ -1,61 +1,12 @@
-﻿// site.js
-// Базовые JavaScript функции для сайта
+﻿// site.js – единый файл со всей клиентской логикой
 
 $(document).ready(function () {
-    // Автоматическое скрытие алертов через 5 секунд
+    // 1. Автоматическое скрытие алертов через 5 секунд
     setTimeout(function () {
         $('.alert').not('.alert-permanent').fadeOut(500);
     }, 5000);
 
-    // Подтверждение важных действий
-    $('form').on('submit', function (e) {
-        if ($(this).hasClass('confirm-submit')) {
-            if (!confirm('Вы уверены, что хотите выполнить это действие?')) {
-                e.preventDefault();
-            }
-        }
-    });
-
-    // Плавное появление элементов при прокрутке
-    if (typeof IntersectionObserver !== 'undefined') {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    }
-
-    // Валидация форм
-    $('form').on('blur', 'input, select, textarea', function () {
-        validateField($(this));
-    });
-
-    function validateField($field) {
-        const value = $field.val();
-        const $formGroup = $field.closest('.form-group, .mb-3');
-
-        if ($field.prop('required') && !value) {
-            $formGroup.addClass('has-error');
-            return false;
-        }
-
-        $formGroup.removeClass('has-error');
-        return true;
-    }
-
-    // Обработка загрузки изображений
-    $('input[type="file"]').on('change', function (e) {
-        const fileName = e.target.files[0]?.name;
-        if (fileName) {
-            $(this).next('.custom-file-label').text(fileName);
-        }
-    });
-
-    // Плавный скролл к якорям
+    // 2. Плавный скролл к якорям
     $('a[href^="#"]').on('click', function (e) {
         if ($(this).attr('href') !== '#') {
             e.preventDefault();
@@ -67,9 +18,74 @@ $(document).ready(function () {
             }
         }
     });
+
+    // 3. Подтверждение удаления для ссылок с классом .delete-confirm
+    $(document).on('click', '.delete-confirm', function (e) {
+        if (!confirm('Вы уверены, что хотите удалить этот элемент? Действие необратимо.')) {
+            e.preventDefault();
+        }
+    });
+
+    // 4. Открытие фото в новой вкладке (каталог)
+    const imageContainers = document.querySelectorAll('.product-image-container');
+    imageContainers.forEach(container => {
+        const img = container.querySelector('img');
+        if (img) {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open(img.src, '_blank');
+            });
+        } else {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open('/images/no-image.png', '_blank');
+            });
+        }
+    });
+
+    // 5. Переключение полей онлайн/офлайн при записи на услугу
+    const formatSelect = document.getElementById('formatSelect');
+    if (formatSelect) {
+        const onlineFields = document.getElementById('onlineFields');
+        const offlineFields = document.getElementById('offlineFields');
+        const toggleFields = () => {
+            if (formatSelect.value === 'online') {
+                if (onlineFields) onlineFields.style.display = 'block';
+                if (offlineFields) offlineFields.style.display = 'none';
+            } else if (formatSelect.value === 'offline') {
+                if (onlineFields) onlineFields.style.display = 'none';
+                if (offlineFields) offlineFields.style.display = 'block';
+            } else {
+                if (onlineFields) onlineFields.style.display = 'none';
+                if (offlineFields) offlineFields.style.display = 'none';
+            }
+        };
+        formatSelect.addEventListener('change', toggleFields);
+        toggleFields(); // установить начальное состояние
+    }
+
+    // 6. Предпросмотр изображения при загрузке файла (общий обработчик)
+    $(document).on('change', '.file-input-preview', function () {
+        const file = this.files[0];
+        const previewContainerId = $(this).data('preview-container');
+        const previewImgId = $(this).data('preview-image');
+
+        if (file && previewContainerId && previewImgId) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $(`#${previewImgId}`).attr('src', e.target.result);
+                $(`#${previewContainerId}`).show();
+            };
+            reader.readAsDataURL(file);
+        } else {
+            if (previewContainerId) $(`#${previewContainerId}`).hide();
+        }
+    });
 });
 
-// Утилитные функции
+// 7. Утилитные функции (могут быть использованы в любом месте)
 function formatPrice(price) {
     return new Intl.NumberFormat('ru-RU', {
         style: 'currency',
@@ -89,15 +105,3 @@ function hideLoading(button, originalText) {
     $button.prop('disabled', false);
     $button.text(originalText);
 }
-
-// Обработчик для кнопок с загрузкой
-$(document).on('click', '.btn-loading', function () {
-    const $btn = $(this);
-    const originalText = $btn.text();
-    showLoading($btn);
-
-    // Через 3 секунды сбрасываем (на случай если что-то пошло не так)
-    setTimeout(() => {
-        hideLoading($btn, originalText);
-    }, 3000);
-});

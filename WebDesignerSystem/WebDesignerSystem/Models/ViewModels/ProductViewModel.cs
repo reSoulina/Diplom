@@ -34,9 +34,9 @@ namespace WebDesignerSystem.Models.ViewModels
 
         [Display(Name = "Изображение")]
         [DataType(DataType.Upload)]
-        public IFormFile? ImageFile { get; set; } // Добавлен знак ?
+        public IFormFile? ImageFile { get; set; }
 
-        public string? ExistingImageUrl { get; set; } // Добавлен знак ?
+        public string? ExistingImageUrl { get; set; }
 
         public List<SelectListItem> Categories { get; set; } = new();
 

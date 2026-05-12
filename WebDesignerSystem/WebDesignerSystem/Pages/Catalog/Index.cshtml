@@ -5,14 +5,12 @@
 }
 
 <div class="catalog-page">
-    <!-- Заголовок каталога - плашка только вокруг надписи -->
     <div class="catalog-header-section">
         <div class="title-wrapper">
             <h1 class="mb-0">Каталог</h1>
         </div>
     </div>
 
-    <!-- Сообщения об успехе/ошибке -->
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success" style="background: rgba(16, 185, 129, 0.2); border: none; color: white; margin-bottom: 1rem;">
@@ -26,7 +24,6 @@
         </div>
     }
     
-    <!-- Панель фильтрации на фиолетовом фоне -->
     <div class="filter-card mb-4">
         <div class="card-body">
             <form method="get" class="row g-3">
@@ -129,7 +126,6 @@
             }
         </div>
         
-        <!-- Статистика внизу -->
         <div class="stats-footer">
             <div class="row g-3">
                 <div class="col-md-3">
@@ -173,28 +169,3 @@
         </div>
     }
 </div>
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const containers = document.querySelectorAll('.product-image-container');
-            containers.forEach(function(container) {
-                const img = container.querySelector('img');
-                if (img) {
-                    img.style.cursor = 'pointer';
-                    img.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        // Открываем изображение в новой вкладке
-                        window.open(this.src, '_blank');
-                    });
-                } else {
-                    container.style.cursor = 'pointer';
-                    container.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        window.open('/images/no-image.png', '_blank');
-                    });
-                }
-            });
-        });
-    </script>
-}

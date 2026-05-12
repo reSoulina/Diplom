@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <!-- Управление каталогом - прямоугольные карточки -->
+    <!-- Карточки управления каталогом -->
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="admin-rect-card">
@@ -29,7 +29,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
             <div class="admin-rect-card">
                 <div class="admin-rect-icon">
@@ -45,7 +44,135 @@
         </div>
     </div>
 
-    <!-- Профиль дизайнера -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-4">
+            <div class="admin-rect-card">
+                <div class="admin-rect-icon">
+                    <i class="bi-bag-check"></i>
+                </div>
+                <div class="admin-rect-content">
+                    <h4 class="admin-rect-title">Заказы</h4>
+                    <a asp-page="/Admin/Orders/Index" class="admin-rect-btn">
+                        Управление <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="admin-rect-card">
+                <div class="admin-rect-icon">
+                    <i class="bi-calendar2-check"></i>
+                </div>
+                <div class="admin-rect-content">
+                    <h4 class="admin-rect-title">Записи</h4>
+                    <a asp-page="/Admin/Appointments/Index" class="admin-rect-btn">
+                        Управление <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ближайшие записи на услуги (ширина как у профиля, с добавленными отступами) -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="catalog-header-section">
+                <div class="title-wrapper">
+                    <h3 class="mb-0">Ближайшие записи</h3>
+                </div>
+            </div>
+            @if (Model.RecentAppointments.Any())
+            {
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Клиент</th>
+                                <th>Услуга</th>
+                                <th>Дата и время</th>
+                                <th>Формат</th>
+                                <th>Статус</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var app in Model.RecentAppointments)
+                            {
+                                <tr>
+                                    <td>@app.Client?.FullName</td>
+                                    <td>@app.Service?.Name</td>
+                                    <td>@app.AppointmentDateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>@(app.Format == "online" ? "Онлайн" : "Офлайн")</td>
+                                    <td>
+                                        <span class="admin-badge" style="background-color:
+                                                    @(app.Status == "pending" ? "#f59e0b" : app.Status == "confirmed" ? "#10b981" : "#3b82f6")">
+                                            @(app.Status == "pending" ? "Ожидает" : app.Status == "confirmed" ? "Подтверждена" : "Выполнена")
+                                        </span>
+                                    </td>
+                                    <td><a asp-page="/Admin/Appointments/Details" asp-route-id="@app.Id" class="admin-action-btn">Детали</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="admin-empty-state p-4" style="width: auto;">
+                    <p>Нет предстоящих записей.</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Активные заказы (ширина как у профиля, с отступами) -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="catalog-header-section">
+                <div class="title-wrapper">
+                    <h3 class="mb-0">Активные заказы</h3>
+                </div>
+            </div>
+            @if (Model.ActiveOrders.Any())
+            {
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Клиент</th>
+                                <th>Дата</th>
+                                <th>Сумма</th>
+                                <th>Статус</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.ActiveOrders)
+                            {
+                                <tr>
+                                    <td>@order.Id</td>
+                                    <td>@order.Client?.FullName</td>
+                                    <td>@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>@order.TotalAmount.ToString("C")</td>
+                                    <td><span class="admin-badge" style="background-color: @order.CurrentStatus.Color">@order.CurrentStatus.Name</span></td>
+                                    <td><a asp-page="/Admin/Orders/Details" asp-route-id="@order.Id" class="admin-action-btn">Детали</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="admin-empty-state p-4" style="width: auto;">
+                    <p>Нет активных заказов.</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Профиль дизайнера (оставлен без изменений, ширина col-md-8) -->
     @if (Model.DesignerProfile != null)
     {
         <div class="row justify-content-center">
@@ -53,7 +180,7 @@
                 <div class="designer-profile-card">
                     <div class="row align-items-center">
                         <div class="col-md-3 text-center">
-                            <img src="@(Model.DesignerProfile.PhotoUrl ?? "/images/profile_photo.jpg")" 
+                            <img src="@(Model.DesignerProfile.PhotoUrl ?? "/images/profile_photo.jpg")"
                                  alt="@Model.DesignerProfile.Name"
                                  class="designer-profile-avatar"
                                  onerror="this.onerror=null; this.src='/images/profile_photo.jpg';">

@@ -147,7 +147,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.2s ease;
     border: none;
 }
-    /* Убираем черную рамку */
+
     button:focus, button:active,
     .btn:focus, .btn:active,
     .btn-hero-primary:focus, .btn-hero-primary:active,
@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
     .btn-edit-profile:focus, .btn-edit-profile:active,
     .btn-change-password:focus, .btn-change-password:active,
     a:focus, a:active {
-        outline: none !important;
+        border: none !important;
         box-shadow: none !important;
     }
 
@@ -319,7 +319,6 @@ footer {
     border-radius: 50px;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: none;
 }
 
 .btn-hero-primary {
@@ -639,6 +638,10 @@ footer {
         color: white;
     }
 
+    .title-wrapper h3 {
+        color: white;
+    }
+
 /* ===== АДМИН-ПАНЕЛЬ, КЛИЕНТСКАЯ ЧАСТЬ, ОБЩИЕ КАРТОЧКИ ===== */
 .admin-rect-card {
     background: var(--primary);
@@ -722,8 +725,7 @@ footer {
     background: var(--primary);
     border-radius: var(--radius);
     overflow: hidden;
-    width: stretch;
-    margin-right: 1rem;
+    padding: 1rem;
 }
 
 .admin-table {
@@ -889,7 +891,6 @@ footer {
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-/* Скрыть пустые блоки валидации */
 .alert-danger:empty {
     display: none;
 }
@@ -1117,12 +1118,12 @@ footer {
 .cart-amount {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 25rem;
-    padding-left: 1rem;
+    padding: 1.5rem;
+    margin-left: 1rem;
     background: var(--primary);
     border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-top: 0;
 }
 
 .btn-cart {
@@ -1172,8 +1173,15 @@ footer {
 /* Увеличиваем ширину столбца "Категория" в админ-таблицах */
 .admin-table th:nth-child(3),
 .admin-table td:nth-child(3) {
-    min-width: 200px;
+    min-width: 100px;
     max-width: 250px;
     white-space: normal;
     word-wrap: break-word;
+}
+
+/* Увеличиваем ширину столбца статуса в таблице активных заказов (пятый столбец) */
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5) {
+    min-width: 100px;
+    white-space: nowrap;
 }

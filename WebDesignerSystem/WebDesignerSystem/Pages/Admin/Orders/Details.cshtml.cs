@@ -21,12 +21,19 @@ namespace WebDesignerSystem.Pages.Admin.Orders
         public Order Order { get; set; }
         public List<OrderItem> OrderItems { get; set; }
         public List<OrderStatus> Statuses { get; set; }
+        public List<OrderStatusHistory> StatusHistory { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Order = await _context.Orders.Include(o => o.Client).Include(o => o.CurrentStatus).FirstOrDefaultAsync(o => o.Id == id);
             if (Order == null) return NotFound();
             OrderItems = await _context.OrderItems.Include(oi => oi.Product).Where(oi => oi.OrderId == id).ToListAsync();
             Statuses = await _context.OrderStatuses.OrderBy(s => s.DisplayOrder).ToListAsync();
+            StatusHistory = await _context.OrderStatusHistories
+                .Include(h => h.Status)
+                .Include(h => h.ChangedByUser)
+                .Where(h => h.OrderId == id)
+                .OrderByDescending(h => h.ChangedAt)
+                .ToListAsync();
             return Page();
         }
         public async Task<IActionResult> OnPostChangeStatusAsync(int id, int newStatusId, string comment)

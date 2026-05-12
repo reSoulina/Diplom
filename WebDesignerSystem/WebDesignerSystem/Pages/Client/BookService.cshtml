@@ -25,18 +25,23 @@
 
                     <div class="mb-3">
                         <label class="form-label">Дата *</label>
-                        <input type="date" asp-for="Input.AppointmentDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                        <input type="date" id="appointmentDate" asp-for="Input.AppointmentDate" class="form-control" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
                         <span asp-validation-for="Input.AppointmentDate" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Время *</label>
-                        <select asp-for="Input.AppointmentTime" class="form-select" required>
-                            <option value="">-- Выберите время --</option>
-                            @for (int i = 9; i <= 18; i++)
+                        <select id="appointmentTime" asp-for="Input.AppointmentTime" class="form-select" required>
+                            @if (Model.AvailableTimeSlots.Any())
                             {
-                                <option value="@i:00">@i:00</option>
-                                <option value="@i:30">@i:30</option>
+                                foreach (var slot in Model.AvailableTimeSlots)
+                                {
+                                    <option value="@slot.Time">@slot.DisplayText</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="">Нет доступного времени</option>
                             }
                         </select>
                         <span asp-validation-for="Input.AppointmentTime" class="text-danger"></span>
@@ -52,17 +57,22 @@
                         <span asp-validation-for="Input.Format" class="text-danger"></span>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Контактный телефон (для онлайн)</label>
-                        <input asp-for="Input.ContactInfo" class="form-control" />
-                        <span class="form-text text-white">Можно изменить, если нужно</span>
-                        <span asp-validation-for="Input.ContactInfo" class="text-danger"></span>
+                    <div id="onlineFields" style="display: none;">
+                        <div class="mb-3">
+                            <label class="form-label">Контактный телефон (для онлайн)</label>
+                            <input asp-for="Input.ContactInfo" class="form-control" />
+                            <span class="form-text text-white">Можно изменить, если нужно</span>
+                            <span asp-validation-for="Input.ContactInfo" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Адрес (для офлайн)</label>
-                        <input asp-for="Input.Address" class="form-control" />
-                        <span class="form-text text-white">Можно изменить</span>
-                        <span asp-validation-for="Input.Address" class="text-danger"></span>
+
+                    <div id="offlineFields" style="display: none;">
+                        <div class="mb-3">
+                            <label class="form-label">Адрес (для офлайн)</label>
+                            <input asp-for="Input.Address" class="form-control" />
+                            <span class="form-text text-white">Можно изменить</span>
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -83,19 +93,68 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        document.getElementById('formatSelect').addEventListener('change', function() {
-            var online = document.getElementById('onlineFields');
-            var offline = document.getElementById('offlineFields');
-            if (this.value === 'online') {
-                online.style.display = 'block';
-                offline.style.display = 'none';
-            } else if (this.value === 'offline') {
-                online.style.display = 'none';
-                offline.style.display = 'block';
+        // Управление видимостью полей онлайн/офлайн
+        const formatSelect = document.getElementById('formatSelect');
+        const onlineFields = document.getElementById('onlineFields');
+        const offlineFields = document.getElementById('offlineFields');
+
+        function toggleFormatFields() {
+            if (formatSelect.value === 'online') {
+                if (onlineFields) onlineFields.style.display = 'block';
+                if (offlineFields) offlineFields.style.display = 'none';
+            } else if (formatSelect.value === 'offline') {
+                if (onlineFields) onlineFields.style.display = 'none';
+                if (offlineFields) offlineFields.style.display = 'block';
             } else {
-                online.style.display = 'none';
-                offline.style.display = 'none';
+                if (onlineFields) onlineFields.style.display = 'none';
+                if (offlineFields) offlineFields.style.display = 'none';
             }
+        }
+        formatSelect.addEventListener('change', toggleFormatFields);
+        toggleFormatFields();
+
+        // Динамическая загрузка доступных слотов времени
+        const dateInput = document.getElementById('appointmentDate');
+        const timeSelect = document.getElementById('appointmentTime');
+        const serviceId = @Model.Service.Id;
+
+        async function loadTimeSlots(date) {
+            if (!date) return;
+            // Правильный URL для вызова обработчика TimeSlots
+            const url = `/Client/BookService/${serviceId}?handler=TimeSlots&date=${encodeURIComponent(date)}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const slots = await response.json();
+                timeSelect.innerHTML = '';
+                if (slots.length === 0) {
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'Нет доступного времени';
+                    timeSelect.appendChild(option);
+                } else {
+                    slots.forEach(slot => {
+                        const option = document.createElement('option');
+                        option.value = slot.value;
+                        option.textContent = slot.text;
+                        timeSelect.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки слотов:', error);
+                timeSelect.innerHTML = '<option value="">Ошибка загрузки времени</option>';
+            }
+        }
+
+        dateInput.addEventListener('change', function() {
+            loadTimeSlots(this.value);
         });
+
+        // Загружаем слоты для текущей даты при загрузке страницы
+        if (dateInput.value) {
+            loadTimeSlots(dateInput.value);
+        }
     </script>
 }

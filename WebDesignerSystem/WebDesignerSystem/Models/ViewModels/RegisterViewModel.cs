@@ -15,7 +15,7 @@ namespace WebDesignerSystem.Models.ViewModels
 
         [Required]
         [Display(Name = "Роль")]
-        public string Role { get; set; } // "Client" или "Designer"
+        public string Role { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Пароль должен содержать минимум {2} символов", MinimumLength = 6)]

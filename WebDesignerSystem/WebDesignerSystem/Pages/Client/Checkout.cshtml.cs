@@ -70,8 +70,7 @@ namespace WebDesignerSystem.Pages.Client
             {
                 FullName = string.IsNullOrEmpty(ClientProfile?.FullName) ? user.FullName : ClientProfile.FullName,
                 Phone = ClientProfile?.Phone ?? "",
-                Address = ClientProfile?.DeliveryAddress ?? "",
-                Notes = ""
+                Address = ClientProfile?.DeliveryAddress ?? ""
             };
 
             return Page();
@@ -107,7 +106,7 @@ namespace WebDesignerSystem.Pages.Client
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = TotalAmount,
                 CurrentStatusId = 1,
-                Notes = Input.Notes,
+                Notes = Input.Notes ?? string.Empty,
                 UpdatedAt = DateTime.UtcNow
             };
             _context.Orders.Add(newOrder);

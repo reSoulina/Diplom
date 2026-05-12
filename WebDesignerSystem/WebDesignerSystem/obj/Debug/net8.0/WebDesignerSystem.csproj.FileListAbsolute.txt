@@ -1,4 +1,5 @@
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\testhost.dll
+D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\testhost.exe
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\appsettings.Development.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\appsettings.json
@@ -8,7 +9,6 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesigner
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\xunit.runner.visualstudio.testadapter.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\xunit.runner.reporters.netcoreapp10.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\xunit.runner.utility.netcoreapp10.dll
-D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\App_Data\WebDesignerSystem.db
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.exe
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.deps.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem\bin\Debug\net8.0\WebDesignerSystem.runtimeconfig.json

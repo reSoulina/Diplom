@@ -27,7 +27,6 @@
                     <input type="hidden" asp-for="Profile.Id" />
                     <input type="hidden" asp-for="Profile.PhotoPath" />
 
-                    <!-- Текущее фото -->
                     @if (!string.IsNullOrEmpty(Model.Profile.PhotoUrl))
                     {
                         <div class="mb-4 text-center">
@@ -41,12 +40,14 @@
                         </div>
                     }
 
-                    <!-- Загрузка нового фото -->
                     <div class="mb-3">
                         <label class="form-label">
                             <i class="bi bi-image me-1"></i>Фото профиля
                         </label>
-                        <input asp-for="PhotoFile" class="form-control" type="file" accept="image/*" id="photoFileInput" />
+                        <input asp-for="PhotoFile" class="form-control file-input-preview"
+                               type="file" accept="image/*"
+                               data-preview-container="imagePreview"
+                               data-preview-image="previewImage" />
                         <div class="form-text">Рекомендуемый размер: 400x400px</div>
                         
                         <div id="imagePreview" class="mt-2" style="display: none;">
@@ -123,21 +124,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
-    <script>
-        document.getElementById('photoFileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('previewImage');
-                    preview.src = e.target.result;
-                    document.getElementById('imagePreview').style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                document.getElementById('imagePreview').style.display = 'none';
-            }
-        });
-    </script>
 }

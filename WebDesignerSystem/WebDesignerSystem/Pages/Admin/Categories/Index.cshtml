@@ -8,7 +8,6 @@
 }
 
 <div class="container">
-    <!-- Заголовок на фиолетовом фоне -->
     <div class="admin-header">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
             <div class="title-wrapper">
@@ -35,9 +34,7 @@
                     @foreach (var category in Model.Categories)
                     {
                         <tr>
-                            <td>
-                                <strong>@category.Name</strong>
-                            </td>
+                            <td><strong>@category.Name</strong></td>
                             <td>
                                 @if (!string.IsNullOrEmpty(category.Description))
                                 {
@@ -52,7 +49,7 @@
                                 <a asp-page="Edit" asp-route-id="@category.Id" class="admin-action-btn" title="Редактировать">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <a asp-page="Delete" asp-route-id="@category.Id" class="admin-action-btn danger" title="Удалить">
+                                <a asp-page="Delete" asp-route-id="@category.Id" class="admin-action-btn danger delete-confirm" title="Удалить">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
@@ -62,7 +59,6 @@
             </table>
         </div>
 
-        <!-- Статистика -->
         <div class="row mt-4">
             <div class="col-md-4 mx-auto">
                 <div class="admin-stat-card">
@@ -84,18 +80,3 @@
         </div>
     }
 </div>
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const deleteButtons = document.querySelectorAll('a[href*="Delete"]');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (!confirm('Вы уверены, что хотите удалить эту категорию?\nТовары этой категории не будут удалены.')) {
-                        e.preventDefault();
-                    }
-                });
-            });
-        });
-    </script>
-}

@@ -13,7 +13,7 @@ namespace WebDesignerSystem.Data
         }
 
         // Таблицы
-        public DbSet<Role> Roles { get; set; }
+        public new DbSet<Role> Roles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }

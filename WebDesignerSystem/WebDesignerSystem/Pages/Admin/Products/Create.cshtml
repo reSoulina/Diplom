@@ -65,7 +65,10 @@
                     
                     <div class="mb-3">
                         <label class="form-label">Изображение (опционально)</label>
-                        <input asp-for="Product.ImageFile" class="form-control" type="file" accept="image/*" id="imageFileInput" />
+                        <input asp-for="Product.ImageFile" class="form-control file-input-preview"
+                               type="file" accept="image/*"
+                               data-preview-container="imagePreview"
+                               data-preview-image="previewImage" />
                         <div class="form-text">Можно добавить позже при редактировании</div>
                         
                         <div id="imagePreview" class="mt-2" style="display: none;">
@@ -91,21 +94,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
-    <script>
-        document.getElementById('imageFileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('previewImage');
-                    preview.src = e.target.result;
-                    document.getElementById('imagePreview').style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                document.getElementById('imagePreview').style.display = 'none';
-            }
-        });
-    </script>
 }
