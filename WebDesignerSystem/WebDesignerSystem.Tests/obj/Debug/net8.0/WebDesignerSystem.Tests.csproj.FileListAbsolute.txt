@@ -1,3 +1,4 @@
+D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_WebDesignerSystem.Tests
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\testhost.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\WebDesignerSystem.deps.json
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\WebDesignerSystem.runtimeconfig.json
@@ -319,9 +320,9 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\refs\
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\refs\System.Xml.XPath.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\refs\System.Xml.XPath.XDocument.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\refs\WindowsBase.dll
+D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Castle.Core.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Testing.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.TestHost.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
@@ -339,6 +340,7 @@ D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Micro
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.TestPlatform.CrossPlatEngine.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.TestPlatform.Utilities.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Microsoft.VisualStudio.TestPlatform.Common.dll
+D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Moq.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\SQLitePCLRaw.batteries_v2.dll
 D:\диплом\WebDesignerSystem\WebDesignerSystem.Tests\bin\Debug\net8.0\SQLitePCLRaw.core.dll

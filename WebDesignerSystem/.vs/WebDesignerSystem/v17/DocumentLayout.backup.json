@@ -3,20 +3,40 @@
   "WorkspaceRootPath": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\client\\bookservice.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\client\\bookservice.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\profiletests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\profiletests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\client\\bookservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\client\\bookservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\producttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\producttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\categorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\categorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\appointmenttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\appointmenttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\fileservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\fileservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\viewmodelvalidationtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\viewmodelvalidationtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\carttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\carttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem.tests\\ordertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB16E59A-74DE-407F-BEAA-149832B07DA1}|WebDesignerSystem.Tests\\WebDesignerSystem.Tests.csproj|solutionrelative:webdesignersystem.tests\\ordertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +46,120 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ViewModelValidationTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\ViewModelValidationTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\ViewModelValidationTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\ViewModelValidationTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\ViewModelValidationTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:26:35.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FileServiceTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\FileServiceTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\FileServiceTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\FileServiceTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\FileServiceTests.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAYwLIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:25:45.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoryTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\CategoryTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\CategoryTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\CategoryTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\CategoryTests.cs",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAUwM8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:25:27.32Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BookService.cshtml.cs",
-              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Client\\BookService.cshtml.cs",
-              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Client\\BookService.cshtml.cs",
-              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Client\\BookService.cshtml.cs",
-              "RelativeToolTip": "WebDesignerSystem\\Pages\\Client\\BookService.cshtml.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAAAGIAAAApAAAAAAAAAA==",
+              "Title": "ProfileTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\ProfileTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\ProfileTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\ProfileTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\ProfileTests.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAiwM4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:37:25.096Z",
+              "WhenOpened": "2026-05-13T19:24:33.755Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BookService.cshtml",
-              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Client\\BookService.cshtml",
-              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Client\\BookService.cshtml",
-              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Client\\BookService.cshtml",
-              "RelativeToolTip": "WebDesignerSystem\\Pages\\Client\\BookService.cshtml",
-              "ViewState": "AgIAACAAAAAAAAAAAAAiwJ8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-12T10:29:38.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "site.css",
-              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "WebDesignerSystem\\wwwroot\\css\\site.css",
-              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "WebDesignerSystem\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8BAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-05-05T14:16:39.17Z",
-              "EditorCaption": ""
+              "Title": "ProductTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\ProductTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\ProductTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\ProductTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\ProductTests.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAqwHYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:24:18.719Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "site.js",
-              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "WebDesignerSystem\\wwwroot\\js\\site.js",
-              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "WebDesignerSystem\\wwwroot\\js\\site.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-05-11T21:52:29.2Z"
+              "Title": "AppointmentTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\AppointmentTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\AppointmentTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\AppointmentTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\AppointmentTests.cs",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAiwOAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:22:50.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OrderTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\OrderTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\OrderTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\OrderTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\OrderTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:22:28.056Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CartTests.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\CartTests.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\CartTests.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\CartTests.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\CartTests.cs",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAkwOgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:21:53.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TestBase.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\TestBase.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem.Tests\\TestBase.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem.Tests\\TestBase.cs",
+              "RelativeToolTip": "WebDesignerSystem.Tests\\TestBase.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAiwJUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T19:21:33.763Z"
             }
           ]
         }

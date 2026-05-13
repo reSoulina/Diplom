@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\pages\\catalog\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\pages\\catalog\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|d:\\\u0434\u0438\u043F\u043B\u043E\u043C\\webdesignersystem\\webdesignersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6C427FE-EFFA-4330-893F-9B043CF95830}|WebDesignerSystem\\WebDesignerSystem.csproj|solutionrelative:webdesignersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +35,67 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "site.css",
-              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "WebDesignerSystem\\wwwroot\\css\\site.css",
-              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "WebDesignerSystem\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAIMEAAAAAAAAAADwv6AEAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-05-05T14:16:39.17Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Index.cshtml",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Index.cshtml",
+              "RelativeToolTip": "WebDesignerSystem\\Pages\\Index.cshtml",
+              "ViewState": "AgIAADcAAAAAAAAAAAAqwF8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-13T22:01:32.553Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "site.js",
-              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "WebDesignerSystem\\wwwroot\\js\\site.js",
-              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "WebDesignerSystem\\wwwroot\\js\\site.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-05-11T21:52:29.2Z"
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Account\\Login.cshtml",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Account\\Login.cshtml",
+              "RelativeToolTip": "WebDesignerSystem\\Pages\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAqwC8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-13T21:59:37.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WebDesignerSystem\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T21:57:37.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Catalog\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Pages\\Catalog\\Index.cshtml",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Pages\\Catalog\\Index.cshtml",
+              "RelativeToolTip": "WebDesignerSystem\\Pages\\Catalog\\Index.cshtml",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAQwKoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-13T21:55:34.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Program.cs",
+              "RelativeDocumentMoniker": "WebDesignerSystem\\Program.cs",
+              "ToolTip": "D:\\\u0434\u0438\u043F\u043B\u043E\u043C\\WebDesignerSystem\\WebDesignerSystem\\Program.cs",
+              "RelativeToolTip": "WebDesignerSystem\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAEIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T21:49:13.573Z",
+              "EditorCaption": ""
             }
           ]
         }

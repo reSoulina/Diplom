@@ -23,7 +23,7 @@ namespace WebDesignerSystem.Pages.Admin.Appointments
             Appointments = await _context.ServiceAppointments
                 .Include(a => a.Client)
                 .Include(a => a.Service)
-                .OrderBy(a => a.AppointmentDateTime)
+                .OrderByDescending(a => a.AppointmentDateTime)
                 .ToListAsync();
         }
     }
